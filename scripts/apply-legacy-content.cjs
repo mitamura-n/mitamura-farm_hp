@@ -1,0 +1,21 @@
+// One-time migration of the initial mockup using the documented legacy source.
+const fs = require('node:fs');
+const path = require('node:path');
+const root = path.join(__dirname, '..');
+const file = path.join(root, 'resources/views/farm.blade.php');
+let html = fs.readFileSync(file, 'utf8');
+html = html.replace('価格・写真・連絡先は確認中です。注文・問い合わせは送信されません。', '旧HPの文章・写真を反映した確認版です。価格・連絡先の現行確認中。フォームは送信されません。');
+html = html.replace('三田村農園のコシヒカリ</p><h1>', '福井県越前市・三田村農園のコシヒカリ</p><h1>');
+html = html.replace(/<div class="landscape"[\s\S]*?<div class="vertical">/, '<div class="landscape"><img class="farm-hero-photo" src="/images/legacy/photo_taue_2019.jpg" alt="三田村農園の田んぼで田植え機に乗る生産者。旧HPに掲載された2019年の田植え風景" width="640" height="360" fetchpriority="high"><span class="image-label">三田村農園の田植え風景 ／ 旧HP掲載写真（2019年）</span><div class="vertical">');
+html = html.replace('お米を選ぶとき、味だけでなく、どのように育てられたかも知っていただきたい。栽培方法と商品の情報を、わかりやすくお伝えします。', '福井県越前市の三田村農園では、農薬・化学肥料・有機肥料を使わず、自然の土の力を大切にした米づくりを続けています。収穫後の乾燥から籾摺りまで自家で行い、玄米は15℃以下で低温保管。白米はご注文後に精米してお届けします。');
+html = html.replace('確認予定：農園の所在地・栽培の工程・生産者の紹介・栽培履歴。「無農薬」表記は栽培情報を確認後に最終調整します。', '栽培・保管方法は旧HPの紹介をもとに掲載しています。現行の工程と商品表示は公開前に最終確認します。');
+html = html.replace('対応する分づきの種類は確認後にご案内します。', '旧HPでは1分・3分・5分・8分などの精米に対応。ご希望の度合いを注文相談でお知らせください。');
+html = html.replace('料理やお菓子づくりに。原料・粒度・用途・容量・価格は確認中です。', '農園のコシヒカリを白米に精米し、専門業者で製粉した上新粉。お菓子づくりや料理に。旧HPの参考価格：1kg 1,500円（現行価格は確認中）。');
+html = html.replace('<span class="sub-symbol">粉</span>', '<img class="flour-photo" src="/images/legacy/komeko_komeko_2.jpg" width="76" height="100" loading="lazy" alt="旧HPに掲載された三田村農園の米粉の袋">');
+html = html.replace('販売形態・用途・取り扱い方法・容量・価格は確認中です。', '農園のコシヒカリからとれた米ぬか。旧HPの参考価格：1kg 1,000円。現在の価格・用途・保存方法は注文相談で確認します。');
+html = html.replace('収穫年・産地・在庫・送料は未確定です。販売情報を確認後に掲載します。', '旧HPの令和7年産参考価格：コシヒカリ10kg 10,000円。重量は玄米基準で、精米後は約1割少なくなります。旧HPでは10kg以上・5kg刻みで受付。令和8年産の販売状況、税込総額、精米料・送料・受付単位は現行確認が必要です。玄米粉は旧HPで在庫切れ・取り扱いなしの記載があります。');
+html = html.replace('在庫、送料、お支払い方法を確認してから注文を確定します。', '農園から在庫・商品代金・精米料・送料をご案内します。内容にご了承いただいてから注文を確定します。');
+html = html.replace('注文方法・支払い方法・発送日数・返品条件は確認中です。上記は導線の案で、確定した販売手順ではありません。', 'フォーム送信は注文相談の受付です。送信した時点では注文は確定しません。お支払い方法・発送日数・返品条件は公開前に確認します。現在のプレビューでは送信されません。');
+html = html.replace('現在、公開に向けて確認中です。確定後、商品案内と注文画面に掲載します。', '旧HPの参考価格を商品案内に記載しています。最新の商品代金・精米料・送料は、注文相談への返信でご案内し、ご了承後に確定します。');
+html = html.replace('連絡先・受付時間・所在地：確認中<br>プレビューでは個人情報を入力せずお試しください。', '旧HP掲載の連絡先：0778-23-5856（電話・FAX）<br>メール：mitamura-info@mitamura-farm.com<br>所在地：福井県越前市中平吹町（番地は確認中）<br>連絡先の継続利用を確認後、正式な受付先を設定します。<br>プレビューでは個人情報を入力せずお試しください。');
+fs.writeFileSync(file, html);

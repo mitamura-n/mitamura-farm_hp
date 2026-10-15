@@ -1,0 +1,14 @@
+const fs=require('node:fs');const path=require('node:path');
+const file=path.join(__dirname,'../resources/views/farm.blade.php');
+let html=fs.readFileSync(file,'utf8');
+html=html.replace('<title>三田村農園｜自然と育てる、お米。</title>','<title>三田村農園｜日野山の麓、代々つなぐ田んぼから。</title>');
+html=html.replace('brand-theme.css?v=1','brand-theme.css?v=2');
+html=html.replace('<a href="#story">農園のこだわり</a>','<a href="#heritage">農園の物語</a><a href="#story">育て方</a>');
+html=html.replace(/<p class="eyebrow">(?:福井県越前市・)+三田村農園のコシヒカリ<\/p>/,'<p class="eyebrow">福井・越前　日野山の麓から</p>');
+html=html.replace('<h1>自然と育てる。<br>毎日の食卓へ。</h1>','<h1>この田んぼを、<br>つないでゆく。</h1>');
+html=html.replace('農薬も、肥料も使わずに。<br>三田村農園から、お米のある暮らしをお届けします。','祖父から父へ、受け継がれてきた田んぼ。<br>日野山の麓、日野川の水で育てたお米を、<br>あなたの食卓へ。');
+html=html.replace('<a class="button" href="#products">お米を選ぶ <span>↓</span></a>','<div class="hero-actions"><a class="button" href="#heritage">農園の物語を読む <span>↓</span></a><a class="hero-product-link" href="#products">お米を選ぶ ↗</a></div>');
+html=html.replace('<div class="vertical">土と、稲と、季節と。</div>','<div class="vertical">山と、水と、家族の田んぼ。</div>');
+html=html.replace('<span>無農薬・無施肥</span><i></i><span>コシヒカリ</span><i></i><span>お好みの精米で</span>','<span>越前・日野山の麓</span><i></i><span>日野川の水</span><i></i><span>代々つなぐ田んぼ</span>');
+if(!html.includes("@include('heritage')")) html=html.replace('<section id="story"',"@include('heritage')\n<section id=\"story\"");
+fs.writeFileSync(file,html);

@@ -1,0 +1,20 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+use App\Http\Controllers\InquiryController;
+
+Route::get('/', function () {
+    session(['inquiry_token' => (string) Str::uuid()]);
+    return response()->view('farm', ['products'=>\App\Models\Product::orderBy('id')->get()->keyBy('name')])->header('Cache-Control', 'no-store, private');
+});
+
+Route::post('/inquiries', [InquiryController::class, 'store'])->middleware('throttle:5,1')->name('inquiries.store');
+
+Route::get('/admin/login', [\App\Http\Controllers\ProductAdminController::class, 'login'])->name('login');
+Route::post('/admin/login', [\App\Http\Controllers\ProductAdminController::class, 'authenticate'])->middleware('throttle:5,1');
+Route::middleware('auth')->group(function () {
+    Route::post('/admin/logout', [\App\Http\Controllers\ProductAdminController::class, 'logout']);
+    Route::get('/admin/products', [\App\Http\Controllers\ProductAdminController::class, 'index']);
+    Route::put('/admin/products/{product}', [\App\Http\Controllers\ProductAdminController::class, 'update']);
+});

@@ -1,0 +1,143 @@
+/* Palette drawn from the supplied farm logo. Keep original PNGs unchanged. */
+:root {
+  --green: #234b35;
+  --ink: #343b31;
+  --paper: #f7f5ed;
+  --line: #deddd0;
+  --gold: #b58b3b;
+  --gold-dark: #79591f;
+  --leaf: #647550;
+  --muted: #5e6458;
+  --cream: #eeece2;
+  --surface: #fffdf7;
+}
+body, header, footer { background: var(--paper); }
+.brand-image { background: transparent; width:170px; height:auto; overflow:visible; }
+.brand-image img { position:static;display:block;width:100%;height:auto;max-width:100%; }
+.brand-image.footer-brand { width:220px;height:auto; }
+@media(max-width:640px) {
+  header .brand-image { width:140px;height:auto; }
+  .brand-image img { position:static;width:100%;height:auto; }
+}
+header { border-bottom: 1px solid var(--line); }
+h1, h2 { color: var(--green); }
+h3, .product-body .price { color: var(--ink); }
+.preview { background: #354b3b; }
+.preview, .button { color: #fff; }
+.eyebrow { color: var(--gold-dark); }
+.lead, .story p, .section-top p, .product-body p, .steps p,
+.faq details p, form small, footer p, footer small { color: var(--muted); }
+.body-lead { color: var(--ink) !important; }
+.button { background: var(--green); border-bottom: 2px solid var(--gold); }
+.button:hover { background: #173b28; }
+.nav-cta { color: var(--green); border-color: var(--gold); }
+nav a:hover, footer a:not(.brand):hover { color: var(--gold-dark); }
+.strip { background: var(--paper); color: var(--green); }
+.strip i { background: var(--gold); }
+.products { background: var(--cream); }
+.product, .subproducts article { background: var(--surface); }
+.product { border: 1px solid var(--line); }
+.product-art.brown { background: #e5dcc8; }
+.product-art.white { background: #f1ede2; }
+.product-art.half { background: #dde2d2; }
+.product-art > span:last-child { color: #544122; }
+.rice-bowl { color: #fffdf5; text-shadow: 0 8px 0 var(--leaf); }
+.product-body small { color: var(--gold-dark); }
+.product button { color: var(--green); border-color: #a9ba86; }
+.product button:hover { border-color: var(--gold); }
+.sub-symbol { color: var(--green); background: #edf0de; }
+.subproducts button { color: var(--green); }
+.principles article > span, .steps b { color: var(--gold-dark); }
+.steps article { border-color: var(--line); }
+.pending { color: var(--muted) !important; border-left-color: var(--gold); }
+.contact { background: #e6eadf; border-top: 1px solid #d3dac9; }
+select, textarea { background: var(--surface); border-color: #7c8973; }
+.menu { color: var(--green); border-color: #7c8973; }
+.image-label { background: #234b35eb; }
+dialog { background: var(--paper); }
+dialog dt { color: var(--gold-dark); }
+dialog::backdrop { background: #123c22ad; }
+a:focus-visible, button:focus-visible, summary:focus-visible,
+select:focus-visible, textarea:focus-visible { outline-color: var(--gold-dark); }
+.contact a[href^='mailto:'] { color: var(--green); }
+.purchase-help{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:22px;padding:28px 30px;margin:0 0 30px;border:1px solid #cfd5c3;background:var(--paper)}
+.purchase-help h3{font-size:22px;margin:0 0 10px}.purchase-help .eyebrow{margin-bottom:8px}.purchase-help p{font-size:13px;color:var(--muted);margin:0}
+.text-link{color:var(--green);border-bottom:1px solid var(--gold);font-size:12px;padding:10px 0}
+.purchase-assurance{width:100%;display:flex;gap:25px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px;font-size:12px;color:var(--green)}
+.purchase-assurance span::before{content:'✓';margin-right:8px}
+.product-body .fee-note{display:block;font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.8}
+.selection-status{padding:12px 15px;border-left:3px solid var(--gold);background:#ffffff80;color:var(--green);font-size:13px;margin:0 0 24px}
+.request-fields input{display:block;width:100%;padding:13px;border:1px solid #7c8973;background:var(--surface);color:var(--ink);font:inherit;font-size:16px;margin-top:7px;border-radius:0}
+.request-fields input:focus-visible{outline:3px solid var(--gold-dark);outline-offset:4px}
+.request-item{border:1px solid #aeb9a3;padding:18px;margin:0 0 18px;min-width:0;background:#ffffff50}
+.request-item legend{padding:0 8px;font-size:12px;color:var(--green)}
+.item-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(90px,.55fr);gap:14px}
+.request-item input{display:block;width:100%;padding:13px;border:1px solid #7c8973;background:var(--surface);font:inherit;font-size:16px;color:var(--ink);margin-top:7px;border-radius:0}
+.request-item label{min-width:0}.request-item [hidden]{display:none!important}
+.add-item,.remove-item{min-height:44px;background:none;color:var(--green);border:1px solid #7c8973;padding:8px 15px}
+.add-item{width:100%;border-style:dashed}.add-item:disabled{opacity:.5;cursor:default}
+.remove-item{font-size:12px;border:0;text-decoration:underline;padding-left:0}
+.form-hint{font-size:11px;color:var(--muted);margin:12px 0 24px}
+.confirmed-items{padding-left:20px}.confirmed-items li{margin:8px 0}
+.spam-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.privacy-check{display:flex;align-items:flex-start;gap:10px;margin-top:18px}.privacy-check input{margin-top:6px;width:18px;height:18px;flex-shrink:0}
+.privacy-notice{font-size:12px}.privacy-notice p{color:var(--muted)}
+.form-errors{background:#fff0e9;color:#7b3026;border-left:3px solid #9a4536;padding:14px;margin-bottom:18px;white-space:pre-line}
+#send-status{white-space:pre-line}#send-inquiry:disabled{opacity:.6;cursor:wait}.close-bottom{padding:12px 0;border:0;background:none;color:var(--green);text-decoration:underline}
+@media(max-width:360px){.item-main{grid-template-columns:1fr}.request-item{padding:14px}}
+dialog{max-height:calc(100dvh - 40px);overflow-y:auto}
+@media(max-width:640px){.purchase-help{padding:22px}.purchase-help h3{font-size:19px}.purchase-help br{display:none}.purchase-assurance{gap:10px;flex-direction:column}.hero-note{line-height:2}}
+
+/* The family story and its landscape lead visitors into the product story. */
+.mobile-break { display:none; }
+.wellness { text-align:center;border-top:1px solid var(--line); }
+.wellness h2 { font-family:Georgia,serif;letter-spacing:.06em;font-size:clamp(32px,4vw,49px);margin-bottom:24px; }
+.wellness > p:not(.eyebrow):not(.body-lead) { color:var(--muted);line-height:2.2; }
+@media(max-width:640px) { .wellness > p br { display:none; } }
+.hero { position:relative;display:block;min-height:680px;isolation:isolate;background:var(--paper); }
+.hero .landscape { position:absolute;inset:0;min-height:0;z-index:-1; }
+.hero .landscape::after { content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f7f5edfa 0%,#f7f5edf2 30%,#f7f5edb8 49%,#234b3510 72%,#173b2838 100%); }
+.hero .farm-hero-photo { object-position:center; }
+.hero-copy { position:relative;width:70%;padding:95px 5% 80px 8%; }
+.hero h1 { font-size:clamp(40px,4.9vw,72px);letter-spacing:.1em;line-height:1.6; }
+.hero .lead { color:var(--ink);line-height:2.3; }
+.hero .vertical,.hero .image-label { z-index:1; }
+.hero .image-label { left:auto;right:18px;max-width:90%; }
+.hero-actions { display:flex;align-items:center;gap:28px;flex-wrap:wrap; }
+.hero-product-link { color:var(--green);font-size:12px;border-bottom:1px solid var(--gold-dark);padding:10px 0; }
+.heritage { display:grid;grid-template-columns:1fr 1fr;gap:10%;padding-top:115px;padding-bottom:115px; }
+.heritage h2 { line-height:1.95; }
+.heritage-body > p:not(.body-lead) { line-height:2.3;color:var(--muted); }
+.inheritance { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:40px;padding-top:24px;border-top:1px solid var(--line);font-size:12px;color:var(--green); }
+.inheritance i { font-style:normal;color:var(--gold-dark); }
+.terroir { background:#213f30;color:#f7f5ed; }
+.terroir-inner { display:grid;grid-template-columns:1fr 1fr;gap:10%; }
+.terroir .eyebrow { color:#d9be82; }
+.terroir h2,.terroir h3 { color:#f7f5ed; }
+.terroir-heading > p:last-child { color:#dde3d8;line-height:2.2; }
+.land-notes article { display:flex;gap:25px;padding:25px 0;border-top:1px solid #ffffff35; }
+.land-notes article:first-child { padding-top:0;border-top:0; }
+.land-word { font:38px 'Noto Serif JP',serif;color:#d9be82;flex-shrink:0; }
+.land-notes h3 { font-size:21px;margin:0 0 10px; }
+.land-notes p { margin:0;color:#dde3d8;line-height:2;font-size:13px; }
+@media(max-width:850px) { nav{gap:16px}.hero-copy{width:85%;padding:70px 7%}.hero{min-height:620px}.heritage,.terroir-inner{gap:40px} }
+@media(max-width:640px) {
+ .hero{min-height:0;display:flex;flex-direction:column;background:var(--paper)}
+ .hero-copy{width:100%;padding:45px 7% 35px}
+ .hero h1{font-size:clamp(29px,9vw,38px);letter-spacing:.04em}.hero .lead{font-size:13px}
+ .hero .landscape{position:relative;inset:auto;min-height:0;height:300px;z-index:0}
+ .hero .landscape::after{background:linear-gradient(0deg,#173f2844,transparent 55%)}
+ .hero .vertical{font-size:17px;right:20px;top:25px}
+ .hero-actions{gap:22px}.hero .image-label{right:10px}
+ .heritage,.terroir-inner{grid-template-columns:1fr;gap:25px}
+ .heritage{padding-top:60px;padding-bottom:60px}.heritage h2{margin-bottom:0}
+ .inheritance{font-size:11px;gap:8px}.land-word{font-size:32px}.land-notes article{gap:20px}
+ h2{font-size:clamp(22px,6.2vw,26px);letter-spacing:.025em}
+ .body-lead{font-size:19px}
+ .mobile-break{display:initial}
+ .menu{min-height:44px;min-width:76px}
+ nav a{padding:10px 0;min-height:44px}
+ .product button,.subproducts button{min-height:44px}
+ select,textarea{font-size:16px}
+ .hero-actions .button{gap:24px}
+}

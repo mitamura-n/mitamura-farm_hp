@@ -1,0 +1,17 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const file = path.join(__dirname, '../resources/views/farm.blade.php');
+let html = fs.readFileSync(file, 'utf8');
+html = html.replace('<link rel="stylesheet" href="style.css">', '<link rel="icon" type="image/png" href="/images/brand/mitamura-icon.png"><link rel="apple-touch-icon" href="/images/brand/mitamura-icon.png"><link rel="stylesheet" href="style.css">');
+html = html.replace('<a class="brand" href="#"><span class="mark">米</span><span>三田村農園<small>MITAMURA FARM</small></span></a>', '<a class="brand brand-image" href="#" aria-label="三田村農園 ホーム"><img src="/images/brand/mitamura-main.png" alt="三田村農園 MITAMURA FARM" width="1024" height="1024"></a>');
+html = html.replace('<a class="brand" href="#">三田村農園</a>', '<a class="brand brand-image footer-brand" href="#" aria-label="三田村農園 ホーム"><img src="/images/brand/mitamura-main.png" alt="三田村農園 MITAMURA FARM" width="1024" height="1024" loading="lazy"></a>');
+html = html.replace('旧HPの文章・写真を反映した確認版です。価格・連絡先の現行確認中。フォームは送信されません。', 'ロゴ・住所・メールを反映しました。価格は暫定設定です。フォームは送信されません。');
+let count=0;
+html = html.replaceAll('容量・価格：確認中', () => ++count === 1 ? '玄米10kg {{ number_format(config(\'farm.rice_10kg_yen\')) }}円' : '玄米10kg換算 {{ number_format(config(\'farm.rice_10kg_yen\')) }}円 ＋ 精米料');
+html = html.replace('旧HPの参考価格：1kg 1,500円（現行価格は確認中）。', '1kg {{ number_format(config(\'farm.flour_1kg_yen\')) }}円。');
+html = html.replace('旧HPの参考価格：1kg 1,000円。現在の価格・用途・保存方法は注文相談で確認します。', '1kg {{ number_format(config(\'farm.bran_1kg_yen\')) }}円。用途・保存方法は注文相談で確認します。');
+html = html.replace(/旧HPの令和7年産参考価格：[\s\S]*?玄米粉は旧HPで在庫切れ・取り扱いなしの記載があります。/, '価格は暫定で、今後変更する場合があります。お米の重量は玄米基準で、精米後は約1割少なくなります。精米料・送料は別途ご案内します。税込表示の扱い・販売年度・在庫・受付単位は公開前に最終確認します。玄米粉は現在の案内対象に含めていません。');
+html = html.replace('旧HPの参考価格を商品案内に記載しています。', '商品案内に暫定価格を記載しています。');
+html = html.replace('旧HP掲載の連絡先：0778-23-5856（電話・FAX）<br>メール：mitamura-info@mitamura-farm.com<br>所在地：福井県越前市中平吹町（番地は確認中）<br>連絡先の継続利用を確認後、正式な受付先を設定します。', 'お問い合わせ・注文相談は、記録が残るフォームまたはメールで承ります。<br><a href="mailto:{{ config(\'farm.email\') }}">{{ config(\'farm.email\') }}</a><br>{{ config(\'farm.address\') }}');
+html = html.replace('受付先を確認後、正式な送信機能を設定します。現在は送信・保存されません。', '正式公開時はフォームとメールでご相談を受け付けます。現在は送信・保存されません。');
+fs.writeFileSync(file,html);
