@@ -24,3 +24,5 @@ Xserverの認証付きプレビューが稼働。管理者登録済み。ペー�
 - [問い合わせ受付](inquiry-intake.md)
 - [Xserverプレビュー](xserver-preview.md)
 - [作業順](roadmap.md)
+
+メール設定に着手。SMTP非秘密値・TLS接続・プレビュー宛先制限を準備。メールアカウントのパスワード設定はユーザー作業待ち。実送信は未実施。詳細はmail-setup.md。最新テスト27件176アサーション。

@@ -127,4 +127,15 @@ class InquiryTest extends TestCase
         $this->assertCount(47, config('farm.prefectures'));
         $this->assertCount(47, array_unique(config('farm.prefectures')));
     }
+
+    public function test_preview_real_mail_only_goes_to_approved_recipients(): void
+    {
+        config(['mail.default'=>'smtp','farm.restrict_mail_recipients'=>true,'farm.mail_allowed_recipients'=>[config('farm.email')]]);
+        $this->send($this->payload())->assertCreated()->assertJson(['notification_pending'=>true]);
+        $record=Inquiry::firstOrFail();
+        $this->assertSame('sent',$record->admin_notice);
+        $this->assertSame('failed',$record->customer_notice);
+        Mail::assertSentCount(1);
+        Mail::assertSent(InquiryReceived::class, fn ($mail)=>$mail->hasTo(config('farm.email')));
+    }
 }

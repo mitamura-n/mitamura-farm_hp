@@ -40,7 +40,12 @@ class InquiryController extends Controller
 
         foreach (['admin_notice' => false, 'customer_notice' => true] as $column => $forCustomer) {
             try {
-                Mail::to($forCustomer ? $inquiry->email : config('farm.email'))->send(new InquiryReceived($inquiry, $forCustomer));
+                $recipient = $forCustomer ? $inquiry->email : config('farm.email');
+                if (config('farm.restrict_mail_recipients') && ! in_array(config('mail.default'), ['log','array'], true)
+                    && ! in_array(strtolower($recipient), array_map('strtolower', config('farm.mail_allowed_recipients')), true)) {
+                    throw new \RuntimeException('Preview mail recipient is not approved.');
+                }
+                Mail::to($recipient)->send(new InquiryReceived($inquiry, $forCustomer));
                 $inquiry->$column = in_array(config('mail.default'), ['log', 'array'], true) ? 'logged' : 'sent';
             } catch (\Throwable $error) {
                 $inquiry->$column = 'failed';
