@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Services\SmtpConnectionCheck;
 use App\Services\SmtpCredentialStore;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class MailCredentialController extends Controller
 {
@@ -22,8 +24,20 @@ class MailCredentialController extends Controller
         $data=$request->validate(['password'=>['required','string','min:8','max:45']]);
         try {
             $checker->check($data['password']);
-        } catch (\Throwable) {
-            return back()->withErrors(['password'=>'SMTP認証を確認できませんでした。メールアカウントのパスワードを確認し、少し待ってからお試しください。']);
+        } catch (\Throwable $error) {
+            // Never log SMTP messages/debug transcripts: they can contain credentials.
+            $reason = 'application';
+            if ($error instanceof TransportExceptionInterface) {
+                $reason = str_contains($error->getMessage(), 'Failed to authenticate')
+                    ? 'authentication' : 'connection';
+            }
+            Log::warning('SMTP credential check failed', ['reason'=>$reason, 'exception_class'=>get_class($error)]);
+            $message = match ($reason) {
+                'authentication' => 'メールサーバーが認証を受け付けませんでした。info@mitamurafarm.com のメールアカウント用パスワードをご確認ください。（確認コード：SMTP-AUTH）',
+                'connection' => 'メールサーバーとの通信を完了できませんでした。少し待ってからお試しください。（確認コード：SMTP-CONNECTION）',
+                default => '接続確認の処理で問題が発生しました。管理者が調査します。（確認コード：SMTP-APP）',
+            };
+            return back()->withErrors(['password'=>$message]);
         }
         try {
             $store->save($data['password']);

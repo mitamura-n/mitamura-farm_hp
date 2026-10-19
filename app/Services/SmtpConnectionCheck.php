@@ -14,6 +14,9 @@ class SmtpConnectionCheck
         $transport->setPassword($password);
         $transport->setLocalDomain('mitamurafarm.com');
         $transport->getStream()->setTimeout(15);
-        try { $transport->start(); } finally { $transport->stop(); }
+        try { $transport->start(); } finally {
+            // A QUIT failure must not hide the original authentication failure.
+            try { $transport->stop(); } catch (\Throwable) {}
+        }
     }
 }
