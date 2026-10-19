@@ -70,6 +70,7 @@ class ProductAdminTest extends TestCase
         $data['items']=[['product'=>'玄米','quantity'=>'10','milling'=>null],['product'=>'玄米','quantity'=>'5','milling'=>null]];
         $this->postJson('/inquiries',$data)->assertUnprocessable();
         $data['items']=[['product'=>'米ぬか','quantity'=>'1','milling'=>null]];
+        Product::where('name','米ぬか')->first()->update(['active'=>false]);
         $this->postJson('/inquiries',$data)->assertUnprocessable()->assertJsonValidationErrors('items.0.product');
     }
 }

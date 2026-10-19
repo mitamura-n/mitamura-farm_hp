@@ -16,7 +16,7 @@ class ExampleTest extends TestCase
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200)->assertSee('三田村農園')->assertSee('制作プレビュー');
+        $response->assertStatus(200)->assertSee('三田村農園')->assertSee('制作プレビュー')->assertSee('令和7年産')->assertSee('令和8年産（新米）')->assertSee('10,000円（税込）')->assertSee('精米料')->assertSee('銀行振込');
         $this->assertTrue(Schema::hasTable('users'));
     }
 }
