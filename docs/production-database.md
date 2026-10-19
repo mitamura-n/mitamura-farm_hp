@@ -49,3 +49,14 @@
 - 最初のキー復号試験ではライブラリAPI不一致を修正し、照合済みchkで暗号化試験のみ再開した。成功後にmanifestのrestore_verifiedをtrueへ更新。
 - 検証後はchkの一時アクセス権を解除し、画面で所有ユーザーなしを確認。本番prodの権限は維持。chkのDBと復元データ自体は保持。再試験時は空の検証DBと権限確認が必要。
 - 定期バックアップ、保存世代、サーバー外保管、本番管理者・HTTP総合試験は別の残作業。
+
+## 2026-10-19 定期バックアップ・世代管理
+- crontabに毎日03:17（サーバーJSTを実測確認）のジョブを登録。既存crontabなしを確認、変更前を非公開backupsへ退避。
+- 実行元：/home/mitamurafarm/apps/mitamura-production/backup-production-daily.sh。flockで重複実行防止、umask077。
+- 実行結果：backups/daily-status.json、診断：backups/daily-last-run.log。パスワードやDB内容は出力しない。失敗はsuccess=falseと非0終了。外部通知はまだなし。
+- 同じ定期処理を手動実行し2026-10-19 19:29 JST成功。snapshot-20261019-102929-f4851f3c、削除0件。時刻指定での初回実行は2026-10-20 03:17予定、まだ未確認。
+- 正常な通常セットの直近30世代を保持。DB・環境設定・manifestを持ち、ハッシュが一致し、既知ファイルだけを含むセットに限定して古いものから処理。
+- restore_verified=true、protected=true、未知ファイル、不完全なセット、リンクは自動削除しない。既存の復元検証済みセットは残す。30世代はこれらの保護セットを除く通常セット数。
+- 自動削除は保存済みバックアップの古い世代に限る。現在のDB・問い合わせの削除運用とは別。
+- サーバー外の保管先、失敗時の外部通知、保護セットの定期的見直しは残作業。cronの将来実行や全バックアップの復元成功は、手動成功と区別する。
+- 実装：scripts/backup-production.php、scripts/backup-production-daily.sh、app/Services/BackupRetention.php。世代処理の保護条件をテスト済み（全39件273アサーション成功）。
