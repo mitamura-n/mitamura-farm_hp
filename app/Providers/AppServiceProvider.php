@@ -19,6 +19,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Never serialize the decrypted password into artisan config:cache output.
+        if (! $this->app->runningInConsole() && ($password = app(\App\Services\SmtpCredentialStore::class)->password())) {
+            config(['mail.mailers.smtp.password'=>$password]);
+        }
     }
 }

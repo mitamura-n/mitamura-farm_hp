@@ -16,6 +16,8 @@ Route::post('/admin/login', [\App\Http\Controllers\ProductAdminController::class
 Route::get('/preview-setup/{token}', [\App\Http\Controllers\PreviewSetupController::class, 'show'])->middleware('throttle:10,1');
 Route::post('/preview-setup/{token}', [\App\Http\Controllers\PreviewSetupController::class, 'store'])->middleware('throttle:5,1');
 Route::middleware('auth')->group(function () {
+    Route::get('/admin/mail-credentials', [\App\Http\Controllers\MailCredentialController::class, 'show'])->name('admin.mail-credentials');
+    Route::post('/admin/mail-credentials', [\App\Http\Controllers\MailCredentialController::class, 'store'])->middleware('throttle:5,1')->name('admin.mail-credentials.store');
     Route::get('/admin/inquiries', [\App\Http\Controllers\InquiryAdminController::class, 'index'])->name('admin.inquiries.index');
     Route::get('/admin/inquiries/{inquiry}', [\App\Http\Controllers\InquiryAdminController::class, 'show'])->name('admin.inquiries.show');
     Route::put('/admin/inquiries/{inquiry}', [\App\Http\Controllers\InquiryAdminController::class, 'update'])->middleware('throttle:30,1')->name('admin.inquiries.update');
