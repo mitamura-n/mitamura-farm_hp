@@ -30,3 +30,13 @@
 
 ## 2026-10-19 接続確認と暗号化保存成功
 本人入力後の成功メッセージをユーザーが確認。チェックは本番専用ユーザーで固定DBへのSELECT DATABASE()/SELECT 1が成功した場合だけ保存する。暗号化保存ファイルproduction-db.encの存在と権限600をSSHで確認（内容は表示しない）。プレビューの接続先切替・本番テーブル作成は行っていない。次は本番専用環境への安全な設定、migration、MariaDBバックアップ・復元検証。
+
+## 2026-10-19 本番専用環境の初期化とバックアップ
+- /home/mitamurafarm/apps/mitamura-productionに独立した非公開環境を作成。新しいAPP_KEY、専用.env、storageを用意。公開ドキュメントルートには接続していない。
+- 本番DB空を確認後、7 migrations成功。MariaDB10.11.18。商品5件の規格・価格・受付設定がプレビューと一致。
+- トランザクション内の架空データで暗号化保存/復号・submission_key重複拒否を検証し、ロールバック。users=0/inquiries=0。
+- APP_DEBUG=false、SEO_INDEXABLE=false、INQUIRIES_ENABLED=false、MAIL_MAILER=log。プレビューのSQLite・SMTPは変更なし。
+- 本番ソースdf55661、依存ライブラリはcomposer.lockの一致確認後プレビューのno-dev vendorを複製。バックアップ用スクリプトを追加転送。
+- 論理バックアップsnapshot-20261019-101811-58cff1a1：database.sql、environment.env、ハッシュ付きmanifest。非公開権限で保存。一時DB認証ファイルは終了時削除。復元確認済みとはまだ扱わない。
+- 復元検証専用DB mitamurafarm_chk（utf8mb4）を空で作成。既存ユーザーmitamurafarm_prdへの権限追加は実行直前承認待ち。復元テスト後に権限を残すかも整理する。
+- 本番のWeb・フォーム・メールの総合検証、管理者、定期/サーバー外バックアップ、正式公開は未実施。
