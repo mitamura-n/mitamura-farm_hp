@@ -11,6 +11,9 @@ if /usr/bin/php8.4 "$base/current/scripts/backup-production.php" --rotate >"$bas
 else
   printf '{"finished_at":"%s","success":false}\n' "$(date -Iseconds)" >"$temporary"
   mv "$temporary" "$status"
+  if [ -f "$base/backups/alert-enabled" ]; then
+    /usr/bin/php8.4 "$base/current/scripts/notify-backup-failure.php" >"$base/backups/alert-last-run.log" 2>&1 || true
+  fi
   exit 1
 fi
 mv "$temporary" "$status"
