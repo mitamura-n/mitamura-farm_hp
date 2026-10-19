@@ -15,7 +15,7 @@
  <p class="form-hint">商品に表示された規格ごとに口数を入力してください。白米・分づき米は精米前の玄米重量を基準にし、精米後は重量が減ります。</p>
  <label for="region">お届け先の都道府県（注文の相談では必須）<select id="region"><option value="">選択してください</option>@foreach(config('farm.prefectures') as $prefecture)<option>{{ $prefecture }}</option>@endforeach</select></label>
  <label for="message">ご相談内容<textarea id="message" rows="4" maxlength="2000" placeholder="袋分けのご希望・商品についてのご質問など"></textarea></label>
- <details class="privacy-notice"><summary>入力情報の取り扱いについて</summary><p>お名前・メールアドレス・ご希望の商品・配送地域・相談内容は、お問い合わせへの回答と注文手続きのために使用します。配送先の詳細はこの段階では不要です。開発中はテスト用の情報だけをご入力ください。</p></details>
+ <details class="privacy-notice"><summary>入力情報の取り扱いについて</summary><p>お名前・メールアドレス・ご希望の商品・配送地域・相談内容は、お問い合わせへの回答と注文手続きのために使用します。配送先の詳細はこの段階では不要です。<a href="#privacy-policy">保存期間・個人情報の取り扱いの詳細</a>もご確認ください。開発中はテスト用の情報だけをご入力ください。</p></details>
  <label class="privacy-check"><input id="privacy" type="checkbox" required>入力情報の取り扱いを確認しました（必須）</label>
  <button class="button" type="submit">内容を確認する <span>→</span></button>
  <small><a href="#delivery">送料・発送・返品条件</a>をご確認ください。確認画面で「この内容で受付する」を押すと保存します。注文はまだ確定しません。@include('mail-mode')</small>
