@@ -8,6 +8,6 @@
 <label for="smtp-password">メールアカウントのパスワード<input id="smtp-password" name="password" type="password" autocomplete="off" minlength="8" maxlength="45" required></label>
 <button>接続確認して安全に保存</button></form>
 <p>この操作ではSMTP認証のみを確認し、メールは送りません。パスワードはサーバーの非公開領域に暗号化して保存し、画面やGitHubには出しません。</p>
-<small>実メールの送信テストと有効化は、この接続設定が終わってから行います。</small>
+<small>現在の送信設定：@include('mail-mode')</small>
 </article>
 @endsection

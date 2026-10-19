@@ -42,3 +42,10 @@
 保存先はshared storageのapp/private/mail-smtp.enc。Laravel暗号化を使い、パスワードを画面・Git・セッション旧入力へ残さない。APP_KEYの安全な保管が必要。ブラウザーからのWebリクエストでは復号した値をリクエスト中のSMTP設定に適用。artisan config:cache時は復号しないためキャッシュへ平文を含めない。CLIで後日実送信テストをする場合は、保存サービスから明示的に設定する必要がある。
 
 テスト30件201アサーション成功。認証情報の入力はユーザー作業待ち。MAIL_MAILER=logを維持し、実配送はまだ行わない。
+
+## 2026-10-19 実送信の現在状況（以前の未実施記述に優先）
+- メールパスワード変更後に認証・暗号化保存成功。単体テストメールは農園Gmail受信トレイへ到着確認済み。
+- ユーザー承認によりプレビューのMAIL_MAILERをsmtpに変更。MAIL_RESTRICT_RECIPIENTS=true、許可宛先はmitamura.farm@gmail.comのみ。
+- ブラウザーの実フォームからテスト受付MF-01M59GN5ZEGVRSQHPD95BPEZ82を登録。DB保存成功、admin_notice/customer_noticeともsent。2通の受信確認はユーザー待ち。
+- 本番の不特定顧客宛て送信は未検証。宛先制限は解除していない。
+- 残作業：2通の受信と返信先、SPF/DKIM結果、DMARC方針、失敗時運用、本番設定を確認する。

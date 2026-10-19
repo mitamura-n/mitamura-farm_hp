@@ -18,7 +18,7 @@
  <details class="privacy-notice"><summary>入力情報の取り扱いについて</summary><p>お名前・メールアドレス・ご希望の商品・配送地域・相談内容は、お問い合わせへの回答と注文手続きのために使用します。配送先の詳細はこの段階では不要です。開発中はテスト用の情報だけをご入力ください。</p></details>
  <label class="privacy-check"><input id="privacy" type="checkbox" required>入力情報の取り扱いを確認しました（必須）</label>
  <button class="button" type="submit">内容を確認する <span>→</span></button>
- <small>確認画面で「この内容で受付する」を押すと保存します。注文はまだ確定しません。開発中のメールはログに記録されます。</small>
+ <small>確認画面で「この内容で受付する」を押すと保存します。注文はまだ確定しません。@include('mail-mode')</small>
 </form>
 <template id="item-template">
  <fieldset class="request-item"><legend>ご希望の商品</legend>
