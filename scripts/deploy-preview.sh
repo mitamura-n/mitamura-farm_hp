@@ -107,12 +107,14 @@ cat > "$web/index.php" <<'PHP'
 <?php
 use Illuminate\Http\Request;
 define('LARAVEL_START', microtime(true));
-$root='/home/mitamurafarm/apps/mitamura-preview/current';
+$root='__APP_RELEASE__';
 if (file_exists($maintenance=$root.'/storage/framework/maintenance.php')) require $maintenance;
 require $root.'/vendor/autoload.php';
 $app=require_once $root.'/bootstrap/app.php';
 $app->handleRequest(Request::capture());
 PHP
+# Pin the release path to avoid PHP-FPM realpath cache keeping the old symlink target.
+sed -i "s|__APP_RELEASE__|$release|g" "$web/index.php"
 chmod 644 "$web/index.php" "$web/.htaccess"
 if [ -f "$web/index.html" ]; then mv "$web/index.html" "$base/backups/default-index-$release_id.html"; fi
 echo "PREVIEW_DEPLOYED=$release_id"
