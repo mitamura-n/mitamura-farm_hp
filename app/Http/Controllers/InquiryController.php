@@ -48,12 +48,12 @@ class InquiryController extends Controller
             }
             $inquiry->save();
         }
-        return response()->json(['receipt' => $inquiry->receipt, 'development' => app()->environment('local'), 'notification_pending' => in_array('failed', [$inquiry->admin_notice, $inquiry->customer_notice], true)], 201);
+        return response()->json(['receipt' => $inquiry->receipt, 'development' => in_array(config('mail.default'), ['log', 'array'], true), 'notification_pending' => in_array('failed', [$inquiry->admin_notice, $inquiry->customer_notice], true)], 201);
     }
 
     private function duplicate(Inquiry $inquiry, string $hash): JsonResponse
     {
         abort_unless(hash_equals($inquiry->payload_hash, $hash), 409, '送信済みの受付です。新しいお問い合わせはページを再読み込みしてください。');
-        return response()->json(['receipt' => $inquiry->receipt, 'development' => app()->environment('local'), 'duplicate' => true, 'notification_pending' => in_array('failed', [$inquiry->admin_notice, $inquiry->customer_notice], true)]);
+        return response()->json(['receipt' => $inquiry->receipt, 'development' => in_array(config('mail.default'), ['log', 'array'], true), 'duplicate' => true, 'notification_pending' => in_array('failed', [$inquiry->admin_notice, $inquiry->customer_notice], true)]);
     }
 }
