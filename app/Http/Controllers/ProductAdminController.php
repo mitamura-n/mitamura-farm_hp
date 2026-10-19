@@ -17,7 +17,7 @@ class ProductAdminController extends Controller
             return back()->withErrors(['email'=>'メールアドレスまたはパスワードが正しくありません。'])->onlyInput('email');
         }
         $request->session()->regenerate();
-        return redirect('/admin/products');
+        return redirect()->intended('/admin/products');
     }
 
     public function logout(Request $request)

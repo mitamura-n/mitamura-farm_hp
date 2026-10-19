@@ -13,6 +13,8 @@ Route::post('/inquiries', [InquiryController::class, 'store'])->middleware('thro
 
 Route::get('/admin/login', [\App\Http\Controllers\ProductAdminController::class, 'login'])->name('login');
 Route::post('/admin/login', [\App\Http\Controllers\ProductAdminController::class, 'authenticate'])->middleware('throttle:5,1');
+Route::get('/preview-setup/{token}', [\App\Http\Controllers\PreviewSetupController::class, 'show'])->middleware('throttle:10,1');
+Route::post('/preview-setup/{token}', [\App\Http\Controllers\PreviewSetupController::class, 'store'])->middleware('throttle:5,1');
 Route::middleware('auth')->group(function () {
     Route::post('/admin/logout', [\App\Http\Controllers\ProductAdminController::class, 'logout']);
     Route::get('/admin/products', [\App\Http\Controllers\ProductAdminController::class, 'index']);

@@ -65,8 +65,13 @@ $app=require 'bootstrap/app.php';
 $request=Illuminate\Http\Request::create('https://preview.mitamurafarm.com/');
 $kernel=$app->make(Illuminate\Contracts\Http\Kernel::class);
 $response=$kernel->handle($request);
-if ($response->getStatusCode()!==200 || !str_contains($response->getContent(),'product-master')) {fwrite(STDERR,'Laravel root check failed');exit(1);}
-echo "Laravel root render: 200 OK\n";
+if (config('farm.preview_require_login')) {
+ if ($response->getStatusCode()!==302 || !str_contains($response->headers->get('Location',''),'/admin/login')) {fwrite(STDERR,'Preview gate check failed');exit(1);}
+ echo "Laravel preview gate: login required\n";
+} else {
+ if ($response->getStatusCode()!==200 || !str_contains($response->getContent(),'product-master')) {fwrite(STDERR,'Laravel root check failed');exit(1);}
+ echo "Laravel root render: 200 OK\n";
+}
 $kernel->terminate($request,$response);
 PHP
 # Snapshot the existing preview files once per release. The old main website is untouched.
@@ -75,8 +80,19 @@ if [ ! -e "$base/shared/basic-auth.htaccess" ]; then cp "$web/.htaccess" "$base/
 if ! grep -qi 'AuthType BASIC' "$base/shared/basic-auth.htaccess"; then echo 'Basic auth missing'; exit 1; fi
 # Make only public assets readable by the web server.
 chmod -R u+rwX,go+rX "$release/public"
-cp -pR "$release/public/"* "$web/"
-cat "$base/shared/basic-auth.htaccess" "$release/public/.htaccess" > "$web/.htaccess"
+for asset in "$release/public/"*; do
+  [ "$(basename "$asset")" = index.php ] && continue
+  cp -pR "$asset" "$web/"
+done
+gate=$("$php" -r 'require "vendor/autoload.php"; $app=require "bootstrap/app.php"; $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap(); echo config("farm.preview_require_login") ? "yes" : "no";')
+# Activate the verified application before removing the old Basic auth layer.
+ln -s "$release" "$base/current-next-$release_id"
+mv -Tf "$base/current-next-$release_id" "$base/current"
+if [ "$gate" = yes ]; then
+  cat "$release/public/.htaccess" > "$web/.htaccess"
+else
+  cat "$base/shared/basic-auth.htaccess" "$release/public/.htaccess" > "$web/.htaccess"
+fi
 cat >> "$web/.htaccess" <<'HT'
 
 Options -Indexes
@@ -99,8 +115,6 @@ $app->handleRequest(Request::capture());
 PHP
 chmod 644 "$web/index.php" "$web/.htaccess"
 if [ -f "$web/index.html" ]; then mv "$web/index.html" "$base/backups/default-index-$release_id.html"; fi
-ln -s "$release" "$base/current-next-$release_id"
-mv -Tf "$base/current-next-$release_id" "$base/current"
 echo "PREVIEW_DEPLOYED=$release_id"
-echo "BASIC_AUTH_PRESERVED=yes"
+echo "PREVIEW_LOGIN_GATE=$gate"
 echo "MAIL_TRANSPORT=log"
