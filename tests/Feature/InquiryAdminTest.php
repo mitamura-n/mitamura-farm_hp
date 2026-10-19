@@ -61,4 +61,35 @@ class InquiryAdminTest extends TestCase
         $this->put('/admin/inquiries/'.$r->id,['status'=>'invalid','version'=>$r->fresh()->getRawOriginal('updated_at')])->assertSessionHasErrors('status');
         Mail::assertNothingSent();
     }
+
+    public function test_retention_review_excludes_orders_unknown_outcomes_and_missing_dates(): void
+    {
+        $this->travelTo(now()->startOfDay());
+        $due=$this->inquiry(['status'=>'closed','order_outcome'=>'not_ordered','closed_at'=>now()->subYear()]);
+        $order=$this->inquiry(['status'=>'closed','order_outcome'=>'ordered','closed_at'=>now()->subYears(2)]);
+        $unknown=$this->inquiry(['status'=>'closed','closed_at'=>now()->subYears(2)]);
+        $missing=$this->inquiry(['status'=>'closed','order_outcome'=>'not_ordered']);
+        $recent=$this->inquiry(['status'=>'closed','order_outcome'=>'not_ordered','closed_at'=>now()->subDays(30)]);
+        $this->actingAs(User::factory()->create(['is_admin'=>true]));
+        $this->get('/admin/inquiries?retention=due')->assertOk()->assertSee($due->receipt)
+            ->assertDontSee($order->receipt)->assertDontSee($unknown->receipt)->assertDontSee($missing->receipt)->assertDontSee($recent->receipt);
+        $this->assertSame(5,Inquiry::count());
+        $this->assertNull($order->retentionReviewAt());
+    }
+
+    public function test_completion_date_is_stable_and_reopening_clears_review(): void
+    {
+        Mail::fake();
+        $r=$this->inquiry();
+        $this->actingAs(User::factory()->create(['is_admin'=>true]));
+        $save=function ($status) use ($r) {
+            $this->put('/admin/inquiries/'.$r->id,['status'=>$status,'order_outcome'=>'not_ordered','version'=>$r->fresh()->getRawOriginal('updated_at')])->assertSessionHasNoErrors();
+        };
+        $save('closed'); $closed=$r->fresh()->closed_at;
+        $this->assertNotNull($closed);
+        $save('closed'); $this->assertTrue($closed->equalTo($r->fresh()->closed_at));
+        $save('in_progress'); $this->assertNull($r->fresh()->closed_at);
+        $this->assertNull($r->fresh()->retentionReviewAt());
+        Mail::assertNothingSent();
+    }
 }
