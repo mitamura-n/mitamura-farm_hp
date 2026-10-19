@@ -22,3 +22,8 @@
 
 ## 2026-10-19 アクセス権付与済み
 ユーザーによる専用DBユーザー作成後、実行直前の承認を受け、mitamurafarm_prdをmitamurafarm_prodのアクセス権所有ユーザーへ追加。管理画面の保存結果を確認。DB接続先localhost。パスワードは取得せず、アプリの接続設定・認証試験・migrationはまだ行っていない。
+
+## 本番DBパスワードの安全な入力
+プレビュー管理者として/admin/database-credentialsを開く。本人が専用DBユーザーのパスワードを入力し、固定先localhost/mitamurafarm_prodへSELECT DATABASE()とSELECT 1のみ実行。成功時のみstorage/app/private/production-db.encへ暗号化保存する。復号にはプレビューのAPP_KEYが必要。接続先切替・migration・テーブル作成は行わない。POSTは5回/分まで。本番環境またはログイン制限のない環境では画面を無効にする。
+
+本番への設定は別途、サーバー内で安全に認証情報を受け渡す。暗号化ファイルを暗号化キーの違う本番アプリへそのまま移しても復号できない。新しい暗号化認証ファイルもバックアップ対象へ含める必要がある。現時点は本人入力待ち。
