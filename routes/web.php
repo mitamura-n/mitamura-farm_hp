@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use App\Http\Controllers\InquiryController;
 
+Route::get('/sitemap.xml', function () {
+    abort_unless(config('seo.indexable'), 404);
+    return response()->view('sitemap')->header('Content-Type','application/xml; charset=UTF-8');
+});
+
 Route::get('/', function () {
     session(['inquiry_token' => (string) Str::uuid()]);
     return response()->view('farm', ['products'=>\App\Models\Product::orderBy('id')->get()->keyBy('name')])->header('Cache-Control', 'no-store, private');
