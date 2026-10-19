@@ -40,3 +40,12 @@
 - 論理バックアップsnapshot-20261019-101811-58cff1a1：database.sql、environment.env、ハッシュ付きmanifest。非公開権限で保存。一時DB認証ファイルは終了時削除。復元確認済みとはまだ扱わない。
 - 復元検証専用DB mitamurafarm_chk（utf8mb4）を空で作成。既存ユーザーmitamurafarm_prdへの権限追加は実行直前承認待ち。復元テスト後に権限を残すかも整理する。
 - 本番のWeb・フォーム・メールの総合検証、管理者、定期/サーバー外バックアップ、正式公開は未実施。
+
+## 2026-10-19 MariaDB復元検証完了
+- ユーザーの実行直前承認後、mitamurafarm_prdへmitamurafarm_chkの権限を追加。
+- snapshot-20261019-101811-58cff1a1のSHA256を検証し、空のchkへ復元。データベースを切り替えるUSE/CREATE DATABASE文のないdumpに限定。
+- 全11テーブルの一覧、全行のハッシュ、CHECK TABLE成功を確認。本番DBは読み取りのみ。
+- chk内の架空暗号化テストデータをdump、削除、再importし、バックアップenvironment.envのAPP_KEYで復号成功。検証テーブルは終了後除去、chkの11テーブルは再び本番と一致。実問い合わせは本番0件、管理者0件。
+- 最初のキー復号試験ではライブラリAPI不一致を修正し、照合済みchkで暗号化試験のみ再開した。成功後にmanifestのrestore_verifiedをtrueへ更新。
+- 検証後はchkの一時アクセス権を解除し、画面で所有ユーザーなしを確認。本番prodの権限は維持。chkのDBと復元データ自体は保持。再試験時は空の検証DBと権限確認が必要。
+- 定期バックアップ、保存世代、サーバー外保管、本番管理者・HTTP総合試験は別の残作業。
