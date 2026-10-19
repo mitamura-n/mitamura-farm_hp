@@ -14,7 +14,11 @@ URL: https://preview.mitamurafarm.com/ （既存のBasic認証を維持）
 - メール: log（実配送なし）。フォームはテスト専用
 - APP_ENV=staging / APP_DEBUG=false / Secure Cookie / noindex / no-store
 
-## 更新
+## このWindows PCからの通常更新
+
+変更をテスト・コミットした後、プロジェクトフォルダーで `./scripts/deploy-preview.ps1` を実行します。未コミット変更がある場合は停止します。SSH鍵と照合済みknown_hostsはPC専用フォルダーを使用し、Gitには含めません。別PCでは `-KeyDirectory` で保管先を指定し、先にそのPC用の接続設定を行ってください。依存導入・バックアップ・migration・起動確認・反映まで行います。GitHubへのpushは別操作です。
+
+## 更新の内部手順
 
 1. ソース変更とテストを終える。
 2. コミットのソースを `git archive --format=tar.gz` で作成する。秘密情報や依存ディレクトリを含めない。
@@ -36,3 +40,7 @@ release-idは半角英数字とハイフンのみ。既存release-idの再使用
 ## 注意
 
 本番ドメイン直下の旧HPは更新しない。Web側PHPの設定は別管理。クラウドからの直接配置は今回構築しない。このWindows PCの秘密鍵をクラウドへ共有しない。
+
+## 初回配置の確認結果（2026-10-19）
+
+release `20261019-01` を配置。composerのプラットフォームチェックとmigration、LaravelのHTTP Kernelによるroot描画200が成功。自動テスト16件95アサーション成功。HTTPSの外部アクセスは401でBasic認証が維持されている。内蔵ブラウザーは認証入力画面を表示せずXserverの「無効なURLです」ページとなるため、認証後の実HTTP動作確認は未完了。管理者アカウントも未作成。システムComposer2.5.8はPHP8.4で非推奨警告を多数出すが、今回の依存導入自体は成功。
