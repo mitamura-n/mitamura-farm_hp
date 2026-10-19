@@ -1,6 +1,5 @@
 @extends('admin.layout')
 @section('content')
-<form method="post" action="/admin/logout">@csrf<button>ログアウト</button></form>
 <p class="notice">規格・価格は暫定です。米ぬかは袋規格を確認してから受付を開始してください。保存するとサイトに反映されます。過去の受付内容は変更されません。</p>
 <p>数量は「1口の重量 × 口数」で受け付けます。白米・分づき米は精米前の玄米重量です。価格は1口あたりで、精米料・送料は含みません。</p>
 @foreach($products as $product)

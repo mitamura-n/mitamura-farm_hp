@@ -16,6 +16,9 @@ Route::post('/admin/login', [\App\Http\Controllers\ProductAdminController::class
 Route::get('/preview-setup/{token}', [\App\Http\Controllers\PreviewSetupController::class, 'show'])->middleware('throttle:10,1');
 Route::post('/preview-setup/{token}', [\App\Http\Controllers\PreviewSetupController::class, 'store'])->middleware('throttle:5,1');
 Route::middleware('auth')->group(function () {
+    Route::get('/admin/inquiries', [\App\Http\Controllers\InquiryAdminController::class, 'index'])->name('admin.inquiries.index');
+    Route::get('/admin/inquiries/{inquiry}', [\App\Http\Controllers\InquiryAdminController::class, 'show'])->name('admin.inquiries.show');
+    Route::put('/admin/inquiries/{inquiry}', [\App\Http\Controllers\InquiryAdminController::class, 'update'])->middleware('throttle:30,1')->name('admin.inquiries.update');
     Route::post('/admin/logout', [\App\Http\Controllers\ProductAdminController::class, 'logout']);
     Route::get('/admin/products', [\App\Http\Controllers\ProductAdminController::class, 'index']);
     Route::put('/admin/products/{product}', [\App\Http\Controllers\ProductAdminController::class, 'update']);
