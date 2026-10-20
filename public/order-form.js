@@ -38,7 +38,7 @@ function renderPrice(target) {
  paragraph(estimate.subtotal === null
   ? '商品代金の目安：' + yen(estimate.products) + '（価格をご案内できる商品のみ）'
   : '小計（目安）：' + yen(estimate.subtotal));
- paragraph('送料・袋代・代引き手数料などは含みません。受付後、合計金額をメールでご案内し、ご了承後に注文を確定します。');
+ paragraph('送料・代引き手数料は含みません。通常のご注文では袋代はかかりません。受付後、合計金額をメールでご案内し、ご了承後に注文を確定します。');
 }
 let confirmedPayload = null;
 let sent = false;
