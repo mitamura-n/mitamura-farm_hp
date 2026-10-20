@@ -13,5 +13,6 @@
  <button id="send-inquiry" type="button" class="button">この内容で受付する →</button></div>
  <p id="send-status" role="status" aria-live="polite"></p>
  <div id="send-errors" class="form-errors" role="alert" hidden></div>
+ <div id="receipt-followup" hidden><p></p><a class="button" href="/?new-inquiry=1#contact">新しいお問い合わせを入力する</a></div>
  <button type="button" class="close-bottom">入力画面に戻る</button>
 </dialog>

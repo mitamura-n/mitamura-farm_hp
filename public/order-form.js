@@ -16,6 +16,28 @@ const errors = document.querySelector('#form-errors');
 const catalog = JSON.parse(document.querySelector('#product-master').textContent);
 let confirmedPayload = null;
 let sent = false;
+const receiptPanel = document.createElement('div');
+receiptPanel.className = 'pending';
+receiptPanel.hidden = true;
+receiptPanel.tabIndex = -1;
+form.after(receiptPanel);
+function showReceipt(receipt, notice) {
+ receiptPanel.replaceChildren();
+ const heading = document.createElement('h3');
+ heading.textContent = 'お問い合わせを受け付けました';
+ const summary = document.createElement('p');
+ summary.textContent = '受付番号：' + receipt + '。注文はまだ確定していません。';
+ const guidance = document.createElement('p');
+ guidance.textContent = notice;
+ const restart = document.createElement('a');
+ restart.className = 'button';
+ restart.href = '/?new-inquiry=1#contact';
+ restart.textContent = '新しいお問い合わせを入力する';
+ receiptPanel.append(heading, summary, guidance, restart);
+ form.hidden = true;
+ form.style.display = 'none';
+ receiptPanel.hidden = false;
+}
 let serial = 0;
 function update(row) {
  const product = row.querySelector('.item-product');
@@ -118,14 +140,24 @@ document.querySelector('#send-inquiry').addEventListener('click', async () => {
    throw new Error(message);
   }
   sent = true;
+  const notice = data.development
+   ? '開発環境のためメールは送信されていません。内容の訂正・追加は、受付番号を添えて農園へメールでお知らせください。'
+   : data.notification_pending
+    ? '内容は保存済みですが、通知処理は未完了です。内容の訂正・追加は、受付番号を添えて農園へメールでお知らせください。'
+    : '内容の訂正・追加は受付メールへ返信してください。別件は下のボタンから入力できます。';
+  showReceipt(data.receipt, notice);
   document.querySelector('#confirmation-details').hidden = true;
   document.querySelector('#confirmation-title').textContent = 'お問い合わせを受け付けました';
   output.textContent = '受付番号：' + data.receipt + '\n注文はまだ確定していません。' + (data.development ? '\n開発環境のため、メールは外部送信されていません。' : data.notification_pending ? '\n内容は保存済みですが、通知処理は未完了です。受付番号をお控えください。' : '\n返信先メールアドレスへの受付メールもご確認ください。');
   document.querySelector('.close-bottom').textContent = '閉じる';
-  status.textContent = '受付済み：' + data.receipt + '。新しい受付はページを再読み込みしてください。';
+  const followup = document.querySelector('#receipt-followup');
+  followup.hidden = false;
+  followup.querySelector('p').textContent = notice;
  } catch (error) {
   output.textContent = ''; failure.textContent = error instanceof TypeError ? '接続を確認できませんでした。同じ内容で再試行できます。' : error.message; failure.hidden = false;
  } finally { button.disabled = sent; }
 });
+dialog.addEventListener('close', () => { if (sent) receiptPanel.focus(); });
 document.querySelectorAll('.close,.close-bottom').forEach(button => button.addEventListener('click',()=>dialog.close()));
+if (new URLSearchParams(location.search).get('new-inquiry') === '1') form.reset();
 addRow();
