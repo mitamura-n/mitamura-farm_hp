@@ -301,3 +301,7 @@ check.mitamurafarm.comのDNSが85.131.213.136へ反映し、証明書検証付�
 ### 2026-10-20：公開配信設定・旧フォーム停止の候補を作成
 
 deployment/production/に転送設定断片、旧フォーム終了案内、統合手順を追加。主要旧HTMLのGET/HEADは対応するアンカーへ転送し、旧フォームPOSTと既知CGIは410として新受付へ再送しない案。対象は本番ホストのみ。qa.htm/low.htmは保留。独立構成のPC内Apache構文検査はSyntax OK。Xserverへの適用・実HTTP動作検証・一般公開は行っていない。案内HTMLを最終切替一覧に加える必要がある。
+
+### 2026-10-20：旧URL配信案の隔離HTTPテスト
+
+PC内127.0.0.1限定の一時Apacheに旧URL用.htaccess断片とダミー原本を配置し32ケース成功。旧HTMLのGET/HEAD転送・クエリ除去・POSTの410案内、CGIのメソッド/PATH_INFO別410、preview/checkへの非適用、その他ファイルと404を確認。実サイトや実CGIには送信せず、一時サーバーは終了。HTTPS/www統一ブロック以降とXserver統合は今回の検証対象外。公開設定は変更していない。
