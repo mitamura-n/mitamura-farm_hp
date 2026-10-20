@@ -143,3 +143,5 @@ dialog{max-height:calc(100dvh - 40px);overflow-y:auto}
 }
 
 .sales-conditions{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:32px 0;padding:28px;background:var(--paper,#f8f5ed);border:1px solid #ccd1c1}.sales-conditions h3{margin:0 0 12px}.sales-conditions p{line-height:1.9}.sales-conditions table{width:100%;border-collapse:collapse;margin-bottom:12px}.sales-conditions caption{text-align:left;margin-bottom:8px;font-size:.9rem}.sales-conditions th,.sales-conditions td{text-align:left;padding:8px;border-bottom:1px solid #ccd1c1}.sales-conditions small{display:block;line-height:1.8}@media(max-width:700px){.sales-conditions{grid-template-columns:1fr;padding:20px;gap:24px}}
+
+.price-summary{margin:20px 0;padding:20px;border-left:3px solid #b68b32;background:#faf8f1;overflow-wrap:anywhere}.price-summary p{margin:0 0 10px;line-height:1.7;font-size:.95rem}.price-summary p:first-child{font-weight:600}.price-summary p:last-child{margin-bottom:0;font-size:.85rem}

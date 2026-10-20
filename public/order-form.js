@@ -14,6 +14,32 @@ const kind = document.querySelector('#kind');
 const status = document.querySelector('#selection-status');
 const errors = document.querySelector('#form-errors');
 const catalog = JSON.parse(document.querySelector('#product-master').textContent);
+const millingFees = JSON.parse(document.querySelector('#milling-fees').textContent);
+function renderPrice(target) {
+ const rows = [...items.children].map(row => ({
+  product: row.querySelector('.item-product').value,
+  units: row.querySelector('.item-quantity').value,
+  milling: row.querySelector('.item-milling').value,
+ }));
+ const estimate = estimateFarmPrice(rows, catalog, millingFees);
+ target.replaceChildren();
+ const paragraph = text => { const p = document.createElement('p'); p.textContent = text; target.append(p); };
+ const yen = amount => amount.toLocaleString('ja-JP') + '円';
+ if (!estimate.lines.length) {
+  paragraph('商品と口数を入力すると、商品代金・精米料の目安を表示します。送料は別途ご案内します。');
+  return;
+ }
+ paragraph('金額の目安（税込・送料別）');
+ for (const line of estimate.lines) paragraph(line.name + ' × ' + line.units + '口：' + (line.amount === null ? '価格は個別にご案内' : yen(line.amount)));
+ paragraph('精米料' + (estimate.millingUnknown ? '（計算できる分）' : '') + '：' + yen(estimate.milling));
+ if (estimate.millingUnknown) paragraph('規定表にない重量の精米料は、受付後に個別にご案内します。');
+ if (estimate.incomplete) paragraph('価格未設定または数量未入力の商品があるため、小計はまだ確定できません。');
+ paragraph(estimate.subtotal === null
+  ? '計算できる分：' + yen(estimate.products + estimate.milling) + '（未確定の商品代金・精米料は含みません）'
+  : '商品代金＋精米料の小計：' + yen(estimate.subtotal));
+ paragraph('送料：別途ご案内（混載・袋分けなどにより変わります）。上記はお支払い総額ではありません。');
+ paragraph('精米料は同じ商品・精米度合いごとの重量で試算しています。袋分け・代引き等の条件も確認し、最終金額をご案内してから注文を確定します。');
+}
 let confirmedPayload = null;
 let sent = false;
 const receiptPanel = document.createElement('div');
@@ -51,6 +77,7 @@ function update(row) {
  milling.disabled = !branched;
  product.required = quantity.value !== '' || kind.value === '注文の相談';
  quantity.required = product.value !== '';
+ renderPrice(document.querySelector('#price-estimate'));
 }
 function relabel() {
  const rows = [...items.children];
@@ -74,7 +101,7 @@ function addRow(product = '', focus = false) {
  row.addEventListener('input', () => update(row));
  row.addEventListener('change', () => update(row));
  row.querySelector('.remove-item').addEventListener('click', () => {
-  row.remove(); relabel(); add.focus(); status.textContent = '商品欄を削除しました。';
+  row.remove(); relabel(); renderPrice(document.querySelector('#price-estimate')); add.focus(); status.textContent = '商品欄を削除しました。';
  });
  items.append(row); update(row); relabel();
  if (focus) row.querySelector('.item-product').focus();
@@ -123,6 +150,7 @@ form.addEventListener('submit', event => {
   output.append(entry);
  }
  if (!output.children.length) { const entry=document.createElement('li'); entry.textContent='商品指定なし'; output.append(entry); }
+ renderPrice(document.querySelector('#confirmation-price'));
  dialog.showModal();
 });
 
