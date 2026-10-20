@@ -109,6 +109,7 @@
 - `scripts/backup-production-offsite.sh` を用意し、Xserverの非公開領域へ配置。明示したスナップショット名・固定の3ファイルだけを対象とし、manifestのDBハッシュ確認、age暗号化、固定フォルダーへの転送、MD5確認を行う。削除・同期処理なし。既存名への上書きは禁止（ageは再暗号化で内容が変わるため、同じスナップショットの再実行は安全側に失敗する場合がある）。構文確認・実転送試験成功。
 - **定期実行への組み込みは未実施。** Google公開ステータスがテスト中のため、Drive権限の更新用トークンは7日で失効する条件に該当する。継続運用の公開設定・再認可・定期実行と失敗通知への統合が残る。根拠：[Google OAuthドキュメント](https://developers.google.com/identity/protocols/oauth2/#expiration)。サーバー内の毎日03:17バックアップは既存設定のまま。
 - 継続運用準備：Google画面で「アプリを公開」が無効、ブランディング未完了の案内を確認。説明・プライバシーのURLが空欄。`docs/backup-app/index.html` と `privacy.html` を公開用原稿として作成し、PC内で表示と相互リンクを確認。予定URLは `https://preview.mitamurafarm.com/backup-app/` と同配下の `privacy.html`。この2ページだけをログイン不要で配置する承認待ち。まだサーバーへ公開しておらず、GoogleのURL登録・継続運用モードへの変更も未実施。
+- 公式要件の再確認：[Googleのブランディング管理](https://support.google.com/cloud/answer/15549049?hl=en)では外部・本番用アプリに説明/ポリシー等のリンクを要求。[Driveスコープ説明](https://developers.google.com/workspace/drive/api/guides/api-specific-auth)ではdrive.fileは非機密。限定利用・非機密であることと、継続運用のURL要件は別として扱う。ポリシー原稿を「農園管理のGoogleアカウント」と明記し、お客様のGoogleアカウントへのアクセスではない旨を追記。説明ページに運用担当者向け利用条件を追加。公開・Googleへの登録・ブランド検証・本番モード切替の成功は未確認。
 
 | 2026-10-19 | サーバー外保管先を農園GmailのGoogle Driveに確定 | 別アカウントへの保存は行わず、農園アカウントのログイン画面を準備。まだアップロード・自動転送は未実施 |
 
