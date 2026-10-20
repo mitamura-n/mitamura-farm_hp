@@ -119,3 +119,7 @@ deployment/production/に転送設定断片、旧フォーム終了案内、統�
 ### 2026-10-20：旧URL配信案の隔離HTTPテスト
 
 PC内127.0.0.1限定の一時Apacheに旧URL用.htaccess断片とダミー原本を配置し32ケース成功。旧HTMLのGET/HEAD転送・クエリ除去・POSTの410案内、CGIのメソッド/PATH_INFO別410、preview/checkへの非適用、その他ファイルと404を確認。実サイトや実CGIには送信せず、一時サーバーは終了。HTTPS/www統一ブロック以降とXserver統合は今回の検証対象外。公開設定は変更していない。
+
+### 2026-10-20：既存配信設定とのHTTP/HTTPS統合検証
+
+現行.htaccessを非公開で取得し、新配信案・現行設定・Laravel標準ルールをPC内Apacheで組み合わせた112ケースが成功。各ルールを本番ホスト限定にしてpreview/checkの既存HTTPS転送を維持し、HTTP旧送信でも410案内を返す例外を追加。トップは本番ホスト限定DirectoryIndexで新入口を優先。TLS証明書検証を有効にした127.0.0.1のダミー環境のみで確認し、一時サーバーは終了。Xserver/PHPの実配信確認と公開適用は未実施。原設定値・一時秘密鍵はGitに含めない。
