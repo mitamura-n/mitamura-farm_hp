@@ -1,6 +1,6 @@
 @php($publicCopy = app()->environment('production') && (!config('farm.preview_require_login') || config('farm.verification_mode')))
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">@include('seo-head')<link rel="icon" type="image/png" sizes="any" href="/images/brand/favicon-transparent.png?v=3"><link rel="apple-touch-icon" href="/images/brand/favicon-transparent.png?v=3"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="/brand-theme.css?v=14"></head>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">@include('seo-head')<link rel="icon" type="image/png" sizes="any" href="/images/brand/favicon-transparent.png?v=3"><link rel="apple-touch-icon" href="/images/brand/favicon-transparent.png?v=3"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="/brand-theme.css?v=15"></head>
 <body>@if(config('farm.verification_mode'))<div class="preview">本番動作確認 <span>実際の注文ではありません。返信先には農園Gmailを入力してください。</span></div>@endif
 @unless($publicCopy)<div class="preview">制作プレビュー <span>開発用プレビューです。受付はテスト用の情報でお試しください。@include('mail-mode')</span></div>@endunless
 <header><a class="brand brand-image" href="#" aria-label="三田村農園 ホーム"><img src="/images/brand/mitamura-main-transparent.png?v=1" alt="三田村農園 MITAMURA FARM" width="1462" height="1076"></a><button class="menu" aria-expanded="false" aria-controls="navigation">メニュー</button><nav id="navigation"><a href="#heritage">農園の物語</a><a href="#story">育て方</a><a href="#products">お米と商品</a><a href="#guide">ご注文の流れ</a><a class="nav-cta" href="#products">商品・価格を見る ↗</a></nav></header>
@@ -25,6 +25,7 @@
  <p class="pending">フォーム送信時点では注文は確定せず、お支払いも発生しません。<a href="#delivery">送料・発送・返品条件</a>をご確認ください。@unless($publicCopy)開発中はテスト用の情報だけをご入力ください。@endunless</p>
 </section>
 @include('delivery-conditions')
+@include('customer-voices')
 <section id="faq" class="section faq"><p class="eyebrow">QUESTIONS</p><h2>よくあるご質問</h2><details><summary>玄米・白米・分づき米の違いは？</summary><p>ぬか層をどの程度残すかが異なります。玄米はぬか層を残し、白米は取り除いています。分づき米はその中間で、精米度合いはフォームで選べます。対応可否は返信でご案内します。</p></details><details><summary>価格や送料はどこで確認できますか？</summary><p>商品案内に価格を記載しています。最新の商品代金・精米料・送料は、注文相談への返信でご案内し、ご了承後に確定します。</p></details><details><summary>今すぐ注文できますか？</summary><p>フォームからご希望をお知らせいただき、在庫・金額のご案内にご了承いただいてから確定します。@if(!$publicCopy)このページは開発中のため、実際のご注文は受け付けていません。@elseif(!config('farm.inquiries_enabled'))現在フォーム受付を停止しています。@endif</p></details><details><summary>注文してから何日で発送されますか？</summary><p>銀行振込・郵便振替は入金確認後、代引きは注文確定後、通常2〜3営業日以内（土日・祝日を除く）に発送します。遅れる場合はメールでご案内します。<a href="#delivery">送料・発送の詳細</a>もご確認ください。</p></details></section>
 @include('wellness')
 <section id="contact" class="section contact"><div><p class="eyebrow">CONTACT</p><h2>ご希望を送って、<br>お届け金額を確認。</h2><p>商品・数量・お届け先の都道府県をお知らせください。<br>在庫と、精米料・送料を含む金額をご案内します。<br>内容にご了承いただいてから、注文確定となります。</p><p class="pending">お問い合わせ・注文相談は、記録が残るフォームまたはメールで承ります。<br><a href="mailto:{{ config('farm.email') }}">{{ config('farm.email') }}</a><br>{{ config('farm.address') }}@unless($publicCopy)<br>プレビューでは個人情報を入力せずお試しください。@endunless</p></div>@include('request-form')</section>

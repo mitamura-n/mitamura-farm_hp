@@ -6,7 +6,7 @@
  @foreach(['関東・信越・北陸・東海・近畿'=>[800,1100,1300,1600],'東北・中国・四国'=>[900,1200,1400,1600],'九州'=>[1000,1300,1500,1700],'北海道'=>[1300,1600,1800,2200],'沖縄'=>[1400,1800,2000,2200]] as $region=>$fees)
  <tr><th scope="row">{{ $region }}</th>@foreach($fees as $fee)<td>{{ number_format($fee) }}</td>@endforeach</tr>@endforeach
  <tr><th scope="row">その他離島</th><td colspan="4">個別にご案内</td></tr></tbody></table></div>
- <p>お米5kgは80サイズ、10kg・20kgは100サイズが目安です。重量の判定には箱・梱包材を含みます。米粉・米ぬかや複数商品の組み合わせは、個別に送料をご案内します。</p>
+ <p>お米は10kg単位でお選びいただけます。10kg・20kgは100サイズが目安です。重量の判定には箱・梱包材を含みます。米粉・米ぬかや複数商品の組み合わせは、個別に送料をご案内します。</p>
  <table style="width:100%"><caption>梱包後25kg超〜30kg：重量ゆうパック・120サイズ（税込）</caption><thead><tr><th scope="col">地域</th><th scope="col">送料</th></tr></thead><tbody>
  @foreach(['関東・信越・北陸・東海・近畿'=>2390,'東北・中国・四国'=>2500,'九州'=>2640,'北海道'=>3060,'沖縄'=>3190] as $region=>$fee)<tr><th scope="row">{{ $region }}</th><td>{{ number_format($fee) }}円</td></tr>@endforeach
  <tr><th scope="row">その他離島</th><td>個別にご案内</td></tr></tbody></table>

@@ -181,3 +181,13 @@ dialog{max-height:calc(100dvh - 40px);overflow-y:auto}
  #request-form>small,dialog p{font-size:14px;line-height:1.9}
  .faq summary,.privacy-notice summary{min-height:48px;padding-top:12px;padding-bottom:12px}
 }
+
+/* Customer voices: readable excerpts across desktop and mobile. */
+.customer-voices{background:#f2f0e7}
+.voice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:36px}
+.voice-grid figure{margin:0;padding:30px;background:#faf9f3;border-top:2px solid #ae883c;display:flex;flex-direction:column;min-width:0}
+.voice-product{font-size:14px;color:#796027;letter-spacing:.12em}
+.voice-grid blockquote{margin:18px 0 24px;font-size:16px;line-height:2}
+.voice-grid blockquote p{margin:0 0 12px}
+.voice-grid figcaption{margin-top:auto;font-size:14px;color:#526052}
+@media(max-width:800px){.voice-grid{grid-template-columns:1fr;gap:18px}.voice-grid figure{padding:24px}.voice-grid blockquote{margin:16px 0}}
