@@ -305,3 +305,5 @@ Search Console管理URL：https://search.google.com/u/1/search-console/sitemaps?
 ### 2026-10-20：ご利用案内を独立ページ化
 
 本人了承により /tokushoho（特定商取引法に基づく表記）、/privacy（プライバシーポリシー）、/shipping（送料・発送・返品）を設置。既存本文・販売条件を移し、正式な販売主体の未確定事項は未解決のまま維持し、氏名等を推測して補完しない。トップの #delivery / #sales-info / #privacy-policy は要約と詳細リンクとして維持する。お客様の声3件は商品案内直後へ移動。フォームからの詳細リンク・フッター・各ページ固有のタイトル/説明/canonical/OG URLとサイトマップを更新する。Echizen Wellnessは維持。解析・送料自動計算は今回の対象外。
+
+反映・確認：プレビュー20261020-221434-09da82cと公開本番09da82cへ反映。20テスト135アサーション成功。公開HTTPで3ページの200応答・個別canonicalを確認し、サイトマップ4URLを確認。実ブラウザで3ページの幅390px・横はみ出しなしを確認、検証用viewport解除済み。公開入口・CSS・currentの変更前参照を非公開ops-stage/information-09da82cへ退避。DB・受付・SMTP設定は変更なし。Search Consoleへのサイトマップ送信済みURLは維持、今回再送信・インデックス登録完了の確認は行っていない。
