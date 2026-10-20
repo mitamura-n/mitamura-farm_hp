@@ -1,0 +1,191 @@
+{
+  "checked_at": "2026-10-20T20:07:26+09:00",
+  "candidate_revision": "8a5f1ab",
+  "current_release": "df55661",
+  "status": "planning_only_not_publication",
+  "excluded_directories": [
+    "preview.mitamurafarm.com",
+    "check.mitamurafarm.com"
+  ],
+  "public_files": [
+    {
+      "path": ".htaccess",
+      "old_kind": "file",
+      "old_sha256": "e45d46d19a7a46bb8bafcd509db54ba2402332305aa38f8ac0e426fccde0815b",
+      "candidate_sha256": "b7e379c77639fd56144947dbae84c84eb466d9c686ea81f2f013ae85421da923",
+      "action": "merge_existing_settings"
+    },
+    {
+      "path": "app.js",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "2f99e1079030e031a71cdef65d6b9bc32223ac4afb7230d9714a32d9eb9ab3e8",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "brand-theme.css",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "0b58c7794245be642af52da864e15db336f19e9451ae772b8a42ec9efc31ec15",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "favicon.ico",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "images/brand/favicon-transparent.png",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "484e4e15c14df19df07e3b1c981e0783abb2513eb44cf200e1618988b0924cd5",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "images/brand/favicon.svg",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "6de89110647a93a9f1bdc3aca708e6cacef4551fc59831517e0a704c0691a19b",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "images/brand/mitamura-icon.png",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "0f32558bb1bb92dab2fdce4960bae10677db1f53df9d8e7970f32df9a01e18ca",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "images/brand/mitamura-main-transparent.png",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "af59481d1941972ea1c4f94895a8d19dc95c92f8c8580778ac2ba0febd25a8ec",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "images/brand/mitamura-main.png",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "df2151e6fc96a78946d45564a27f824d391a3b0117b30cb7b6a0fc13fca21d61",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "images/legacy/komeko_komeko_2.jpg",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "922feb9008456d0d88856c91cfc07f187aef684af480c1e4f0a9843dda26c607",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "images/legacy/komeko_photo_genmaiko.jpg",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "f244179f0d972fcb140c39133e4d295a46c4b110ad1b9c9aec1caed1cf2a8d3c",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "images/legacy/photo_taue_2019.jpg",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "d74ec9338f67407fbf8f175076b2903972cfb3afca54448593a17d0ce19f23e8",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "images/legacy/taue_2.jpg",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "6043721b043daf226a7e329f31c0e9e5d253d14712ae8029c813974d93e1e0b9",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "images/legacy/top_3.jpg",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "788d71106f68e7a8f0ff87e3f8d62b2d54b888dca1800cce25cc78f93d7c01f0",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "index.php",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "eba77cba39695b6bd091fe5211d481f7ebb2ce2d8d26230b5a609465d0a4aff9",
+      "action": "generate_pinned_production_entry"
+    },
+    {
+      "path": "order-form.js",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "a0ea307a3197e8d31afb8f8e79ad6f51a544123b15d5f29c3ab2ba791fa0591f",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "price-estimate.js",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "00db54ea8965f6da1745272b10c1077758606267cc680332bc414ef9d4a6d893",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "product-quantity.js",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "f802427fa95154d4e3865bdf1b04c2d42f1272136cc5531af28fabc9f42bcaf7",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "purchase-flow.js",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "9827dd5e0401322de5354d9fa167de3ef1e6031582dd50e0b2fe3575806ca587",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "robots.txt",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "e5c4b84484ee4216e9373be99380320c25dd94805f99f0a805846f087636553f",
+      "action": "copy_public_asset"
+    },
+    {
+      "path": "style.css",
+      "old_kind": "absent",
+      "old_sha256": null,
+      "candidate_sha256": "548f44d5569b64158f60a4731b886f0489120a1d2bf59de924ad1b6fc9e82d6f",
+      "action": "copy_public_asset"
+    }
+  ],
+  "preserve_before_cutover": [
+    {
+      "path": "index.htm",
+      "exists": true,
+      "sha256": "5b249ae6d637612fa5a0e22f8b2cb2cfb99661fad5b0fee78383bb93e2963a18"
+    },
+    {
+      "path": ".htaccess",
+      "exists": true,
+      "sha256": "e45d46d19a7a46bb8bafcd509db54ba2402332305aa38f8ac0e426fccde0815b"
+    },
+    {
+      "path": ".user.ini",
+      "exists": true,
+      "sha256": "7cf08307b14ad5cee9bad3a13fad4adea1ec9ec7e05cb14dcfe34f1e9b0687a7"
+    },
+    {
+      "path": "order.htm",
+      "exists": true,
+      "sha256": "1d0572415b70eff5672206d83eaa4e143b8fe1b7288f1877727a4256fac2cedc"
+    },
+    {
+      "path": "otoiawase.htm",
+      "exists": true,
+      "sha256": "735c5c836e163b906fbdb4b31ba8494b28c3b602646ac997899d524f7cd8f2da"
+    },
+    {
+      "path": "kantan-cgi/formmail.pl",
+      "exists": false,
+      "sha256": null
+    }
+  ]
+}
