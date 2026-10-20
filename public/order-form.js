@@ -26,11 +26,11 @@ function renderPrice(target) {
  const paragraph = text => { const p = document.createElement('p'); p.textContent = text; target.append(p); };
  const yen = amount => amount.toLocaleString('ja-JP') + '円';
  if (!estimate.lines.length) {
-  paragraph('商品と口数を入力すると、商品代金・精米料の目安を表示します。送料は別途ご案内します。');
+  paragraph('商品と数量を選ぶと、金額の目安を表示します。送料は別途ご案内します。');
   return;
  }
  paragraph('金額の目安（税込・送料別）');
- for (const line of estimate.lines) paragraph(line.name + ' × ' + line.units + '口：' + (line.amount === null ? '価格は個別にご案内' : yen(line.amount)));
+ for (const line of estimate.lines) paragraph(line.name + ' ' + farmQuantityLabel(catalog.find(p => p.name === line.name), line.units) + '：' + (line.amount === null ? '価格は個別にご案内' : yen(line.amount)));
  paragraph('精米料' + (estimate.millingUnknown ? '（計算できる分）' : '') + '：' + yen(estimate.milling));
  if (estimate.millingUnknown) paragraph('規定表にない重量の精米料は、受付後に個別にご案内します。');
  if (estimate.incomplete) paragraph('価格未設定または数量未入力の商品があるため、小計はまだ確定できません。');
@@ -71,8 +71,16 @@ function update(row) {
  const milling = row.querySelector('.item-milling');
  const spec = catalog.find(p => p.name === product.value && p.active);
  const branched = !!spec?.milling;
- quantity.max = spec?.max_units || 999;
- row.querySelector('.item-spec').textContent = spec ? spec.unit_label + ' × 口数' + (spec.max_units ? '（上限' + spec.max_units + '口）' : '') : '商品を選ぶと規格が表示されます。';
+ if (quantity.dataset.product !== product.value) {
+  quantity.replaceChildren(new Option(spec ? '数量を選択してください' : '先に商品を選んでください', ''));
+  if (spec) {
+   const options = document.createDocumentFragment();
+   for (let units = 1; units <= (spec.max_units || 999); units++) options.append(new Option(farmQuantityLabel(spec, units), String(units)));
+   quantity.append(options);
+  }
+  quantity.dataset.product = product.value;
+ }
+ quantity.disabled = !spec;
  row.querySelector('.item-milling-label').hidden = !branched;
  milling.disabled = !branched;
  product.required = quantity.value !== '' || kind.value === '購入希望・お見積もり';
@@ -145,7 +153,7 @@ form.addEventListener('submit', event => {
   if (!product) continue;
   const entry = document.createElement('li');
   const spec = catalog.find(p => p.name === product);
-  entry.textContent = product + '：' + spec.unit_label + ' × ' + row.querySelector('.item-quantity').value + '口'
+  entry.textContent = product + '：' + farmQuantityLabel(spec, row.querySelector('.item-quantity').value)
    + (product === '分づき米' ? '（' + row.querySelector('.item-milling').value + '）' : '');
   output.append(entry);
  }

@@ -14,7 +14,6 @@
  <p id="selection-status" class="selection-status" role="status" aria-live="polite">商品ごとに数量を入力できます。複数の商品もまとめてお知らせください。</p>
  <div id="request-items"></div>
  <button type="button" id="add-item" class="add-item">＋ 商品を追加する</button>
- <p class="form-hint">商品に表示された規格ごとに口数を入力してください。白米・分づき米は精米前の玄米重量を基準にし、精米後は重量が減ります。</p>
  <div id="price-estimate" class="price-summary" role="status" aria-live="polite" aria-atomic="true"></div>
  <label for="region">お届け先の都道府県（購入希望・お見積もりでは必須）<select id="region"><option value="">選択してください</option>@foreach(config('farm.prefectures') as $prefecture)<option>{{ $prefecture }}</option>@endforeach</select></label>
  <label for="message">ご相談内容<textarea id="message" rows="4" maxlength="2000" placeholder="袋分けのご希望・商品についてのご質問など"></textarea></label>
@@ -28,7 +27,7 @@
  <fieldset class="request-item"><legend>ご希望の商品</legend>
   <div class="item-main">
    <label class="item-product-label">商品<select class="item-product"><option value="">選択してください</option>@foreach($products->where('active', true) as $product)<option>{{ $product->name }}</option>@endforeach</select></label>
-   <label class="item-quantity-label">数量（口）<input class="item-quantity" type="number" min="1" step="1" max="999" inputmode="numeric" placeholder="例：1"><small class="item-spec">商品を選ぶと規格が表示されます。</small></label>
+   <label class="item-quantity-label">数量<select class="item-quantity" disabled><option value="">先に商品を選んでください</option></select></label>
   </div>
   <label class="item-milling-label" hidden>分づきのご希望<select class="item-milling"><option>未定・指定なし</option><option>1分</option><option>3分</option><option>5分</option><option>8分</option></select></label>
   <button class="remove-item" type="button">この商品欄を削除</button>

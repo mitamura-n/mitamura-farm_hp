@@ -145,3 +145,15 @@ dialog{max-height:calc(100dvh - 40px);overflow-y:auto}
 .sales-conditions{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:32px 0;padding:28px;background:var(--paper,#f8f5ed);border:1px solid #ccd1c1}.sales-conditions h3{margin:0 0 12px}.sales-conditions p{line-height:1.9}.sales-conditions table{width:100%;border-collapse:collapse;margin-bottom:12px}.sales-conditions caption{text-align:left;margin-bottom:8px;font-size:.9rem}.sales-conditions th,.sales-conditions td{text-align:left;padding:8px;border-bottom:1px solid #ccd1c1}.sales-conditions small{display:block;line-height:1.8}@media(max-width:700px){.sales-conditions{grid-template-columns:1fr;padding:20px;gap:24px}}
 
 .price-summary{margin:20px 0;padding:20px;border-left:3px solid #b68b32;background:#faf8f1;overflow-wrap:anywhere}.price-summary p{margin:0 0 10px;line-height:1.7;font-size:.95rem}.price-summary p:first-child{font-weight:600}.price-summary p:last-child{margin-bottom:0;font-size:.85rem}
+
+/* Product rows adapt to the form width, including narrow desktop side panels. */
+#request-form{container-type:inline-size}
+.request-item{padding:22px;border:1px solid #b8c5b1;border-radius:8px;background:#fafbf6;margin-bottom:20px}
+.request-item legend{font-size:14px;font-weight:600;letter-spacing:.04em}
+.item-main{grid-template-columns:minmax(0,1fr);gap:18px}
+.request-item .item-main label{margin:0;font-size:14px;line-height:1.5}
+.request-item select{width:100%;min-height:52px;padding:12px 36px 12px 14px;margin-top:8px;border:1px solid #8c9c82;border-radius:5px;font-size:16px;line-height:1.5;background-color:#fffef9;color:var(--ink);box-sizing:border-box}
+.request-item select:disabled{color:#6b7465;background-color:#f0f2eb}
+.request-item select:focus-visible{outline:2px solid var(--gold-dark);outline-offset:3px}
+.request-item .item-milling-label{margin-top:18px;font-size:14px}
+@container(min-width:540px){.item-main{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px}}

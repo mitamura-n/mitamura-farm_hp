@@ -16,6 +16,9 @@ class Product extends Model
     public function quantityText(int|float|string $quantity): string
     {
         $units = (float) $quantity / $this->unit_kg;
-        return $this->unit_label.' × '.rtrim(rtrim(number_format($units, 3, '.', ''), '0'), '.').'口（計'.$quantity.'kg'.(in_array($this->name, ['白米', '分づき米']) ? '・精米前' : '').'）';
+        if ($this->name === '玄米') return $quantity.'kg';
+        if (in_array($this->name, ['白米', '分づき米'])) return '玄米'.$quantity.'kg分';
+        $count=rtrim(rtrim(number_format($units, 3, '.', ''), '0'), '.');
+        return $count.'袋（'.($units === 1.0 ? $this->unit_kg.'kg入り' : '計'.$quantity.'kg').'）';
     }
 }
