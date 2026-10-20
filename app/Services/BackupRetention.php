@@ -14,11 +14,15 @@ class BackupRetention
             $path=$root.DIRECTORY_SEPARATOR.$name;
             if (is_link($path) || !is_dir($path) || realpath(dirname($path))!==$root) continue;
             $files=array_values(array_diff(scandir($path),['.','..']));
-            $allowed=['database.sql','environment.env','manifest.json','dump-error.log'];
+            $allowed=['database.sql','environment.env','manifest.json','dump-error.log','mail-smtp.enc'];
             if (array_diff($files,$allowed) || !is_file($path.'/manifest.json') || !is_file($path.'/database.sql') || !is_file($path.'/environment.env')) continue;
             foreach ($files as $file) if (is_link($path.'/'.$file) || !is_file($path.'/'.$file)) continue 2;
             $manifest=json_decode(file_get_contents($path.'/manifest.json'),true);
             if (($manifest['database'] ?? '')!=='mitamurafarm_prod' || !isset($manifest['sha256']) || !hash_equals($manifest['sha256'],hash_file('sha256',$path.'/database.sql'))) continue;
+            foreach (($manifest['files_sha256'] ?? []) as $file=>$hash) {
+                if (!in_array($file,['database.sql','environment.env','mail-smtp.enc'],true) || !is_string($hash) || !is_file($path.'/'.$file) || !hash_equals($hash,hash_file('sha256',$path.'/'.$file))) continue 2;
+            }
+            if (is_file($path.'/mail-smtp.enc') && !isset($manifest['files_sha256']['mail-smtp.enc'])) continue;
             // Tested restore checkpoints and manually protected sets are never rotated.
             if (!empty($manifest['restore_verified']) || !empty($manifest['protected'])) continue;
             $eligible[$name]=$files;

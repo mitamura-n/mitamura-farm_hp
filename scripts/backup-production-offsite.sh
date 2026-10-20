@@ -15,15 +15,25 @@ for file in database.sql environment.env manifest.json; do
   test -f "$source_dir/$file" && test ! -L "$source_dir/$file"
 done
 test ! -L "$source_dir"
+files=(database.sql environment.env manifest.json)
+if [ -f "$source_dir/mail-smtp.enc" ]; then
+  test ! -L "$source_dir/mail-smtp.enc"
+  files+=(mail-smtp.enc)
+fi
 /usr/bin/php8.4 -r '
   $path=$argv[1];
   $manifest=json_decode(file_get_contents($path."/manifest.json"),true,512,JSON_THROW_ON_ERROR);
   if (($manifest["database"]??null)!=="mitamurafarm_prod" ||
       !hash_equals($manifest["sha256"]??"",hash_file("sha256",$path."/database.sql"))) exit(1);
+  foreach (($manifest["files_sha256"]??[]) as $file=>$hash) {
+    if (!in_array($file,["database.sql","environment.env","mail-smtp.enc"],true) || !is_string($hash) ||
+        !is_file($path."/".$file) || is_link($path."/".$file) || !hash_equals($hash,hash_file("sha256",$path."/".$file))) exit(1);
+  }
+  if (is_file($path."/mail-smtp.enc") && !isset($manifest["files_sha256"]["mail-smtp.enc"])) exit(1);
 ' "$source_dir"
 temporary=$(mktemp "$base/offsite/transfer-XXXXXXXX.age")
 trap 'rm -f -- "$temporary"' EXIT
-tar -czf - -C "$source_dir" database.sql environment.env manifest.json |
+tar -czf - -C "$source_dir" "${files[@]}" |
   "$base/tools/age" -R "$base/offsite/recipient.txt" >"$temporary"
 name="$snapshot.tar.gz.age"
 # Restrict operation to the app-created folder. Never sync or delete remote data.

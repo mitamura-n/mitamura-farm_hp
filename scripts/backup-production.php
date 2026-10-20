@@ -23,9 +23,17 @@ try {
     if (!unlink($credentials)) throw new RuntimeException('Temporary credential cleanup failed.');
     if (!copy($base.'/shared/.env',$directory.'/environment.env')) throw new RuntimeException('Key backup failed.');
     chmod($directory.'/environment.env',0600);
+    $hashes=['database.sql'=>hash_file('sha256',$directory.'/database.sql'), 'environment.env'=>hash_file('sha256',$directory.'/environment.env')];
+    $smtp=$base.'/shared/storage/app/private/mail-smtp.enc';
+    if (is_file($smtp)) {
+        if (is_link($smtp) || !copy($smtp,$directory.'/mail-smtp.enc')) throw new RuntimeException('SMTP backup failed.');
+        chmod($directory.'/mail-smtp.enc',0600);
+        $hashes['mail-smtp.enc']=hash_file('sha256',$directory.'/mail-smtp.enc');
+    }
     file_put_contents($directory.'/manifest.json',json_encode([
         'created_at'=>date(DATE_ATOM),'database'=>'mitamurafarm_prod','sha256'=>hash_file('sha256',$directory.'/database.sql'),
         'restore_verified'=>false,
+        'files_sha256'=>$hashes,
     ],JSON_PRETTY_PRINT));
     echo 'PRODUCTION_BACKUP='.basename($directory).PHP_EOL;
     echo "RESTORE_VERIFICATION_PENDING\n";
