@@ -21,6 +21,7 @@ Route::post('/admin/login', [\App\Http\Controllers\ProductAdminController::class
 Route::get('/preview-setup/{token}', [\App\Http\Controllers\PreviewSetupController::class, 'show'])->middleware('throttle:10,1');
 Route::post('/preview-setup/{token}', [\App\Http\Controllers\PreviewSetupController::class, 'store'])->middleware('throttle:5,1');
 Route::middleware('auth')->group(function () {
+    Route::get('/admin/legacy-site/{path?}', [\App\Http\Controllers\LegacySiteController::class, 'show'])->where('path', '.*')->name('admin.legacy-site');
     Route::get('/admin/database-credentials', [\App\Http\Controllers\ProductionDatabaseCredentialController::class, 'show'])->name('admin.database-credentials');
     Route::post('/admin/database-credentials', [\App\Http\Controllers\ProductionDatabaseCredentialController::class, 'store'])->middleware('throttle:5,1')->name('admin.database-credentials.store');
     Route::get('/admin/mail-credentials', [\App\Http\Controllers\MailCredentialController::class, 'show'])->name('admin.mail-credentials');
