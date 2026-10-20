@@ -50,6 +50,22 @@ class InquiryTest extends TestCase
         $this->assertTrue($customerMail->hasReplyTo(config('farm.email')));
     }
 
+    public function test_payment_guidance_only_appears_in_customer_purchase_receipt(): void
+    {
+        $inquiry = new Inquiry;
+        $inquiry->forceFill(collect($this->payload())->only(['name', 'email', 'kind', 'items', 'region', 'message'])->all());
+        $inquiry->receipt = 'MF-COPY-TEST';
+        $purchase = (new InquiryReceived($inquiry, true))->render();
+        $this->assertStringContainsString('振込手数料・郵便振替の払込手数料はお客様負担', $purchase);
+        $this->assertStringContainsString('330円', $purchase);
+        $this->assertStringContainsString('注文確定のご案内が届くまでお待ちください', $purchase);
+        $this->assertStringNotContainsString('振込手数料・郵便振替', (new InquiryReceived($inquiry, false))->render());
+        foreach (['商品についてのご質問', 'その他のお問い合わせ'] as $kind) {
+            $inquiry->kind = $kind;
+            $this->assertStringNotContainsString('振込手数料・郵便振替', (new InquiryReceived($inquiry, true))->render());
+        }
+    }
+
     public function test_duplicate_submission_does_not_create_or_notify_twice(): void
     {
         $data = $this->payload();

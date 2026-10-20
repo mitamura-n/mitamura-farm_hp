@@ -159,3 +159,25 @@ dialog{max-height:calc(100dvh - 40px);overflow-y:auto}
 @container(min-width:540px){.item-main{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px}}
 
 .quantity-guidance{font-size:14px;line-height:1.8;color:var(--ink);margin:8px 0 20px}.quantity-guidance p{margin:0 0 4px}
+
+/* Full purchase journey and comfortable touch targets. */
+.order-steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.order-steps article{min-width:0}.order-steps h3{font-size:18px;line-height:1.6}.order-steps p{font-size:14px;line-height:1.9}
+.order-payment-note{font-size:14px;line-height:1.9;color:var(--muted);max-width:820px;margin:24px auto}
+@media(min-width:641px) and (max-width:1000px){.order-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){
+ .order-steps{grid-template-columns:1fr;gap:24px}
+ .order-payment-note{margin:24px 0}
+ .menu,.product button,.subproducts button,.add-item,.remove-item,.close-bottom{min-height:48px}
+ .menu,.subproducts button,.close{min-width:48px}
+ nav a{min-height:48px;display:flex;align-items:center}
+ .button{min-height:48px;align-items:center}
+ .close{min-height:48px;display:grid;place-items:center}
+ .privacy-check{min-height:48px;align-items:center;font-size:14px;line-height:1.8}
+ .privacy-check input{margin-top:0}
+ #request-form input:not([type="checkbox"]),#request-form select,#request-form textarea{font-size:16px}
+ #request-form input:not([type="checkbox"]),#request-form select{min-height:48px}
+ .form-hint,.privacy-notice{font-size:14px;line-height:1.9}
+ #request-form>small,dialog p{font-size:14px;line-height:1.9}
+ .faq summary,.privacy-notice summary{min-height:48px;padding-top:12px;padding-bottom:12px}
+}
