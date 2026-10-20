@@ -1,5 +1,5 @@
 <section id="delivery" class="section">
- <p class="eyebrow">DELIVERY & RETURNS</p><h2>送料・発送・返品について</h2>
+ <p class="eyebrow">DELIVERY & RETURNS</p>@unless($standalone ?? false)<h2>送料・発送・返品について</h2>@endunless
  <p>送料は税込・1個口の目安です。梱包後の重量・箱サイズ・組み合わせを確認し、注文確定前に合計金額をご案内します。</p>
  <details><summary>地域別の送料表を見る（税込）</summary>
  <div style="overflow-x:auto" tabindex="0" role="region" aria-label="通常便の送料表（横にスクロールできます）"><table style="min-width:580px;width:100%"><caption>通常便の送料（円）</caption><thead><tr><th scope="col">地域</th>@foreach([60,80,100,120] as $size)<th scope="col">{{ $size }}サイズ</th>@endforeach</tr></thead><tbody>

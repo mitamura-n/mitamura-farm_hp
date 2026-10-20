@@ -14,6 +14,16 @@ Route::get('/', function () {
     return response()->view('farm', ['products'=>\App\Models\Product::orderBy('id')->get()->keyBy('name')])->header('Cache-Control', 'no-store, private');
 });
 
+foreach (config('seo.pages') as $path => $page) {
+    Route::get('/'.$path, function () use ($path, $page) {
+        return response()->view('information-page', [
+            'page'=>$page, 'pageTitle'=>$page['title'].'｜三田村農園',
+            'pageDescription'=>$page['description'],
+            'pageUrl'=>rtrim(config('seo.url'), '/').'/'.$path,
+        ])->header('Cache-Control', 'no-store, private');
+    });
+}
+
 Route::post('/inquiries', [InquiryController::class, 'store'])->middleware('throttle:5,1')->name('inquiries.store');
 
 Route::get('/admin/login', [\App\Http\Controllers\ProductAdminController::class, 'login'])->name('login');
