@@ -1,0 +1,11 @@
+<?php
+// Fixed production entry. Activate only during the reviewed cutover.
+header('Cache-Control: no-store, private');
+if (!in_array(strtolower($_SERVER['HTTP_HOST'] ?? ''), ['mitamurafarm.com', 'www.mitamurafarm.com'], true)) { http_response_code(404); exit; }
+if (!is_file('/home/mitamurafarm/apps/mitamura-production/production-http-enabled')) { http_response_code(503); exit('ただいま準備中です。しばらくしてからご利用ください。'); }
+if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off') { http_response_code(403); exit; }
+define('LARAVEL_START', microtime(true));
+$root = '__PRODUCTION_RELEASE__';
+require $root.'/vendor/autoload.php';
+$app = require $root.'/bootstrap/app.php';
+$app->handleRequest(Illuminate\Http\Request::capture());

@@ -77,3 +77,7 @@
 ### FAQの移転先（2026-10-20）
 
 既存の「よくあるご質問」に固定ID faqを付与し、旧qa.htmの転送先を/#faqに確定。過去の検証でqa.htmが未転送だった記録は当時の結果で、最新案ではGET/HEADを301、POST等を410に変更。low.htmは引き続き保留。
+
+### 公開入口のファイル名
+
+旧HPの優先表示を準備中に変えないため、新しい公開入口はfarm-index.phpとして別名で準備する。公開.htaccessの本番DirectoryIndexとLaravelフォールバックもfarm-index.phpへ統一する。入口は本番ホスト・HTTPS・非公開のproduction-http-enabledフラグを検査する。index.phpをそのまま公開ルートへコピーしない。
