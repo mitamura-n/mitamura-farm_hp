@@ -1,0 +1,117 @@
+{
+  "revision": "adb5c45",
+  "phase": "published_verified",
+  "activated_at": "2026-10-20T11:55:18+00:00",
+  "retired_file_count": 1519,
+  "verified_at": "2026-10-20T20:58:23+09:00",
+  "inbox_two_messages_confirmed_by_user": true,
+  "files": [
+    {
+      "path": "app.js",
+      "old_sha256": null,
+      "new_sha256": "2f99e1079030e031a71cdef65d6b9bc32223ac4afb7230d9714a32d9eb9ab3e8"
+    },
+    {
+      "path": "brand-theme.css",
+      "old_sha256": null,
+      "new_sha256": "0b58c7794245be642af52da864e15db336f19e9451ae772b8a42ec9efc31ec15"
+    },
+    {
+      "path": "favicon.ico",
+      "old_sha256": null,
+      "new_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "images/brand/favicon-transparent.png",
+      "old_sha256": null,
+      "new_sha256": "484e4e15c14df19df07e3b1c981e0783abb2513eb44cf200e1618988b0924cd5"
+    },
+    {
+      "path": "images/brand/favicon.svg",
+      "old_sha256": null,
+      "new_sha256": "6de89110647a93a9f1bdc3aca708e6cacef4551fc59831517e0a704c0691a19b"
+    },
+    {
+      "path": "images/brand/mitamura-icon.png",
+      "old_sha256": null,
+      "new_sha256": "0f32558bb1bb92dab2fdce4960bae10677db1f53df9d8e7970f32df9a01e18ca"
+    },
+    {
+      "path": "images/brand/mitamura-main-transparent.png",
+      "old_sha256": null,
+      "new_sha256": "af59481d1941972ea1c4f94895a8d19dc95c92f8c8580778ac2ba0febd25a8ec"
+    },
+    {
+      "path": "images/brand/mitamura-main.png",
+      "old_sha256": null,
+      "new_sha256": "df2151e6fc96a78946d45564a27f824d391a3b0117b30cb7b6a0fc13fca21d61"
+    },
+    {
+      "path": "images/legacy/komeko_komeko_2.jpg",
+      "old_sha256": null,
+      "new_sha256": "922feb9008456d0d88856c91cfc07f187aef684af480c1e4f0a9843dda26c607"
+    },
+    {
+      "path": "images/legacy/komeko_photo_genmaiko.jpg",
+      "old_sha256": null,
+      "new_sha256": "f244179f0d972fcb140c39133e4d295a46c4b110ad1b9c9aec1caed1cf2a8d3c"
+    },
+    {
+      "path": "images/legacy/photo_taue_2019.jpg",
+      "old_sha256": null,
+      "new_sha256": "d74ec9338f67407fbf8f175076b2903972cfb3afca54448593a17d0ce19f23e8"
+    },
+    {
+      "path": "images/legacy/taue_2.jpg",
+      "old_sha256": null,
+      "new_sha256": "6043721b043daf226a7e329f31c0e9e5d253d14712ae8029c813974d93e1e0b9"
+    },
+    {
+      "path": "images/legacy/top_3.jpg",
+      "old_sha256": null,
+      "new_sha256": "788d71106f68e7a8f0ff87e3f8d62b2d54b888dca1800cce25cc78f93d7c01f0"
+    },
+    {
+      "path": "order-form.js",
+      "old_sha256": null,
+      "new_sha256": "a0ea307a3197e8d31afb8f8e79ad6f51a544123b15d5f29c3ab2ba791fa0591f"
+    },
+    {
+      "path": "price-estimate.js",
+      "old_sha256": null,
+      "new_sha256": "00db54ea8965f6da1745272b10c1077758606267cc680332bc414ef9d4a6d893"
+    },
+    {
+      "path": "product-quantity.js",
+      "old_sha256": null,
+      "new_sha256": "f802427fa95154d4e3865bdf1b04c2d42f1272136cc5531af28fabc9f42bcaf7"
+    },
+    {
+      "path": "purchase-flow.js",
+      "old_sha256": null,
+      "new_sha256": "9827dd5e0401322de5354d9fa167de3ef1e6031582dd50e0b2fe3575806ca587"
+    },
+    {
+      "path": "robots.txt",
+      "old_sha256": null,
+      "new_sha256": "bcb80de4c7ba48e9adf247ab2c755e08224f7c358060651b7a503857eca1c071"
+    },
+    {
+      "path": "style.css",
+      "old_sha256": null,
+      "new_sha256": "548f44d5569b64158f60a4731b886f0489120a1d2bf59de924ad1b6fc9e82d6f"
+    },
+    {
+      "path": "farm-index.php",
+      "old_sha256": null,
+      "new_sha256": "7b89a10c617fbad3465387f0ef37648282467d50cd2b517ff9872c88581f67aa"
+    },
+    {
+      "path": "legacy-form-closed.html",
+      "old_sha256": null,
+      "new_sha256": "9fae58ad2f82768d8c438560991a22aff339946680ce3207815f7d99edb8d4b8"
+    }
+  ],
+  "htaccess_before": "e45d46d19a7a46bb8bafcd509db54ba2402332305aa38f8ac0e426fccde0815b",
+  "htaccess_ready": "df7e1378031b2f78d9b6a9a35721c524dc72d6ad8ff39f9478a8fcfb15b19df3"
+}
