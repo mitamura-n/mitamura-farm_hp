@@ -23,7 +23,7 @@ class InquiryTest extends TestCase
 
     private function payload(): array
     {
-        return ['submission_key' => (string) Str::uuid(), 'name' => '受付テスト', 'email' => 'inquiry-test@example.com', 'kind' => '注文の相談', 'items' => [['product' => '白米', 'quantity' => '10', 'milling' => null], ['product' => '米粉', 'quantity' => '1', 'milling' => null]], 'region' => '福井県', 'message' => '開発確認用です。', 'privacy' => true];
+        return ['submission_key' => (string) Str::uuid(), 'name' => '受付テスト', 'email' => 'inquiry-test@example.com', 'kind' => '購入希望・お見積もり', 'items' => [['product' => '白米', 'quantity' => '10', 'milling' => null], ['product' => '米粉', 'quantity' => '1', 'milling' => null]], 'region' => '福井県', 'message' => '開発確認用です。', 'privacy' => true];
     }
 
     private function send(array $data)

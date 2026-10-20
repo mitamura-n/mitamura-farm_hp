@@ -75,7 +75,7 @@ function update(row) {
  row.querySelector('.item-spec').textContent = spec ? spec.unit_label + ' × 口数' + (spec.max_units ? '（上限' + spec.max_units + '口）' : '') : '商品を選ぶと規格が表示されます。';
  row.querySelector('.item-milling-label').hidden = !branched;
  milling.disabled = !branched;
- product.required = quantity.value !== '' || kind.value === '注文の相談';
+ product.required = quantity.value !== '' || kind.value === '購入希望・お見積もり';
  quantity.required = product.value !== '';
  renderPrice(document.querySelector('#price-estimate'));
 }
@@ -108,7 +108,7 @@ function addRow(product = '', focus = false) {
  return row;
 }
 add.addEventListener('click', () => addRow('', true));
-kind.addEventListener('change', () => { [...items.children].forEach(update); document.querySelector('#region').required = kind.value === '注文の相談'; });
+kind.addEventListener('change', () => { [...items.children].forEach(update); document.querySelector('#region').required = kind.value === '購入希望・お見積もり'; });
 document.querySelectorAll('[data-product]').forEach(button => button.addEventListener('click', () => {
  const product = button.dataset.product;
  if (!catalog.some(p => p.name === product && p.active)) { status.textContent = product + 'は現在受付を停止しています。ご質問は相談内容へお書きください。'; return; }
@@ -117,7 +117,7 @@ document.querySelectorAll('[data-product]').forEach(button => button.addEventLis
  if (row) row.querySelector('.item-product').value = product;
  else row = addRow(product);
  if (!row) { status.textContent = '商品欄は10件までです。内容欄に追加のご希望をお書きください。'; return; }
- kind.value = '注文の相談'; [...items.children].forEach(update);
+ kind.value = '購入希望・お見積もり'; [...items.children].forEach(update);
  document.querySelector('#region').required = true;
  status.textContent = product + 'を選択しました。商品ごとの数量をご入力ください。';
  document.querySelector('#contact').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
@@ -128,7 +128,7 @@ form.addEventListener('submit', event => {
  errors.hidden = true;
  if (sent) { dialog.showModal(); return; }
  const chosen = [...items.children].filter(row => row.querySelector('.item-product').value);
- if (!chosen.length && (kind.value === '注文の相談' || !document.querySelector('#message').value.trim())) {
+ if (!chosen.length && (kind.value === '購入希望・お見積もり' || !document.querySelector('#message').value.trim())) {
   errors.textContent = '商品と数量、またはご相談内容を入力してください。'; errors.hidden = false; errors.focus(); return;
  }
  confirmedPayload = {
@@ -189,3 +189,5 @@ dialog.addEventListener('close', () => { if (sent) receiptPanel.focus(); });
 document.querySelectorAll('.close,.close-bottom').forEach(button => button.addEventListener('click',()=>dialog.close()));
 if (new URLSearchParams(location.search).get('new-inquiry') === '1') form.reset();
 addRow();
+
+document.querySelector('#region').required = kind.value === '購入希望・お見積もり';

@@ -14,7 +14,7 @@ class StoreInquiryRequest extends FormRequest
     {
         return [
             'submission_key' => ['required', 'uuid'],
-            'kind' => ['required', Rule::in(['商品についての相談', '注文の相談', 'その他のお問い合わせ'])],
+            'kind' => ['required', Rule::in(['購入希望・お見積もり', '商品についてのご質問', 'その他のお問い合わせ', '商品についての相談', '注文の相談'])],
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email:rfc', 'max:254'],
             'items' => ['present', 'array', 'max:10'],
@@ -34,7 +34,7 @@ class StoreInquiryRequest extends FormRequest
         return [function (Validator $validator) {
             if ($validator->errors()->isNotEmpty()) return;
             $items = $this->input('items', []);
-            if ($this->input('kind') === '注文の相談') {
+            if (in_array($this->input('kind'), ['購入希望・お見積もり', '注文の相談'], true)) {
                 if (count($items) === 0) $validator->errors()->add('items', 'ご希望の商品と数量を入力してください。');
                 if (! $this->filled('region')) $validator->errors()->add('region', '送料のご案内のため、都道府県を選択してください。');
             }
