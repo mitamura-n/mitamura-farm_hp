@@ -11,3 +11,11 @@
 <meta property="og:image" content="{{ config('seo.indexable') ? config('seo.url') : rtrim(config('app.url'), '/').'/' }}images/brand/mitamura-main.png">
 <meta property="og:image:alt" content="三田村農園のロゴ">
 <meta name="twitter:card" content="summary">
+
+@if(config('seo.indexable'))
+@if(config('seo.site_verification'))<meta name="google-site-verification" content="{{ config('seo.site_verification') }}">@endif
+@php
+$websiteStructuredData = ['@context'=>'https://schema.org','@type'=>'WebSite','name'=>'三田村農園','url'=>config('seo.url')];
+@endphp
+<script type="application/ld+json">@json($websiteStructuredData)</script>
+@endif
