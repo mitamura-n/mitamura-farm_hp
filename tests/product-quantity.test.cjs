@@ -15,3 +15,12 @@ test('bag quantities show bag count and weight using current master size',()=>{
  assert.equal(context.farmQuantityLabel({name:'米ぬか',unit_kg:1},2),'2袋（計2kg）');
  assert.equal(context.farmQuantityLabel({name:'米粉',unit_kg:2},2),'2袋（計4kg）');
 });
+test('common rice choices stop at 60kg and respect master limits',()=>{
+ assert.equal(JSON.stringify(context.farmQuantityChoices({name:'白米',unit_kg:10})), '[1,2,3,4,5,6]');
+ assert.equal(JSON.stringify(context.farmQuantityChoices({name:'玄米',unit_kg:10,max_units:3})), '[1,2,3]');
+ assert.equal(JSON.stringify(context.farmQuantityChoices({name:'分づき米',unit_kg:20})), '[1,2,3]');
+});
+test('bag choices stay short and respect smaller master limits',()=>{
+ assert.equal(context.farmQuantityChoices({name:'米粉',unit_kg:1}).length,10);
+ assert.equal(context.farmQuantityChoices({name:'米ぬか',unit_kg:1,max_units:4}).length,4);
+});

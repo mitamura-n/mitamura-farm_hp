@@ -37,7 +37,7 @@ function renderPrice(target) {
  paragraph(estimate.subtotal === null
   ? '計算できる分：' + yen(estimate.products + estimate.milling) + '（未確定の商品代金・精米料は含みません）'
   : '商品代金＋精米料の小計：' + yen(estimate.subtotal));
- paragraph('送料：別途ご案内（混載・袋分けなどにより変わります）。上記はお支払い総額ではありません。');
+ paragraph('送料・袋代などの未確定費用は、この小計に含みません。袋分け・梱包方法を確認し、お見積もりでご案内します。');
  paragraph('精米料は同じ商品・精米度合いごとの重量で試算しています。袋分け・代引き等の条件も確認し、最終金額をご案内してから注文を確定します。');
 }
 let confirmedPayload = null;
@@ -75,7 +75,7 @@ function update(row) {
   quantity.replaceChildren(new Option(spec ? '数量を選択してください' : '先に商品を選んでください', ''));
   if (spec) {
    const options = document.createDocumentFragment();
-   for (let units = 1; units <= (spec.max_units || 999); units++) options.append(new Option(farmQuantityLabel(spec, units), String(units)));
+   for (const units of farmQuantityChoices(spec)) options.append(new Option(farmQuantityLabel(spec, units), String(units)));
    quantity.append(options);
   }
   quantity.dataset.product = product.value;
