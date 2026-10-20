@@ -23,7 +23,10 @@ if (!$password) throw new RuntimeException('SMTP credential unavailable.');
 if (config('farm.email')!=='mitamura.farm@gmail.com' || !in_array('mitamura.farm@gmail.com',config('farm.mail_allowed_recipients'),true)) throw new RuntimeException('Unexpected notification recipient.');
 config(['mail.mailers.smtp.password'=>$password]);
 $when=$finished->setTimezone(new DateTimeZone('Asia/Tokyo'))->format('Y/m/d H:i:s');
-$body="三田村農園の本番DBバックアップが完了しませんでした。\n実行日時：{$when}（日本時間）\n分類：バックアップまたは世代管理の処理失敗\nサーバー内の実行結果を確認してください。顧客情報・認証情報はこの通知に含めていません。";
+$classification=($status['failure_stage']??'')==='offsite_transfer'
+    ? '暗号化バックアップのDrive転送または転送確認の失敗（サーバー内バックアップは作成済み）'
+    : 'バックアップまたは世代管理の処理失敗';
+$body="三田村農園のバックアップ処理が完了しませんでした。\n実行日時：{$when}（日本時間）\n分類：{$classification}\nサーバー内の実行結果を確認してください。顧客情報・認証情報はこの通知に含めていません。";
 Illuminate\Support\Facades\Mail::mailer('smtp')->raw($body,function ($message) {
     $message->to('mitamura.farm@gmail.com')->subject('【三田村農園】バックアップ失敗のお知らせ');
 });
