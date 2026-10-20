@@ -15,7 +15,7 @@
 | /okome2.htm | /#story |
 | /order.htm | /#guide |
 | /otoiawase.htm | /#contact |
-| /qa.htm | FAQに固定IDを付けた後に決定 |
+| /qa.htm | /#faq（新HPのよくあるご質問） |
 | /komeko/komeko.htm | /#products |
 | /komenuka/komenuka_Top.htm | /#products |
 | /low.htm | 特商法表記の内容・移転先が完成するまで保留 |
