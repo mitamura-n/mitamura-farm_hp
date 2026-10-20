@@ -275,3 +275,7 @@ PC内127.0.0.1限定の一時Apacheに旧URL用.htaccess断片とダミー原本
 本人了承後、農園GmailでSearch ConsoleのURLプレフィックス https://mitamurafarm.com/ の所有権をHTMLメタタグ方式で確認。「所有権を証明しました」を画面確認。確認タグは本番の非公開環境設定で保持し、公開headへ出力する。維持に必要なので削除しない。サイトマップ https://mitamurafarm.com/sitemap.xml を送信し、Google画面で2026/10/20・「成功しました」・検出ページ数1を確認。送信は1回。サイトは1ページ構成のためアンカー別URLや管理画面は送らない。
 
 Search Console管理URL：https://search.google.com/u/1/search-console/sitemaps?resource_id=https%3A%2F%2Fmitamurafarm.com%2F （農園Gmailでログイン）。成功はGoogleによるサイトマップ取得の確認であり、検索インデックス登録完了・表示順位・反映日の保証ではない。Googleビジネスプロフィールは対面営業の実態を本人確認中で、まだ登録していない。
+
+### 2026-10-20：Googleビジネスプロフィールは登録を見送る
+
+本人確認：親戚・知人への個別手渡しはあるが、一般客向けの店頭販売は行わず、ネット販売・発送が中心。Google公式の『営業時間内に顧客と直接対応するビジネス』という対象条件と、オンラインのみの事業は対象外という案内を確認。この回答だけで通常の対面営業があるとは判断せず、現時点で新規登録は行わない。架空の営業時間・来店対応・店舗情報は作らない。今後一般客への対面受渡しや自社訪問販売を通常営業として実施する場合に再検討する。Search Console・通常の検索SEOは既に進めた状態を維持。根拠：https://support.google.com/business/answer/13763036?hl=ja
