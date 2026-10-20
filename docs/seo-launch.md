@@ -33,3 +33,7 @@
 OGP画像は暫定ロゴ。横長の共有画像を後日制作可能。構造化データは販売主体・表示根拠が未確定のため今回は追加しない。順位上昇や検索登録は保証しない。
 
 参考：Google https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes?hl=ja
+
+## 2026-10-20：転送設定案の準備（未適用）
+
+主要旧HTMLの実ファイル存在はサーバー内で確認済み。deployment/production/README.mdとlegacy-rewrites.confにGET/HEADの転送先、旧POST/CGIの410停止案を整理。qa.htmとlow.htmは対応先の完成まで保留。画像・PDFの一括転送はしない。独立したPCのApache構文検査は成功したが、Xserverへの設定適用やHTTP動作検証は未実施。
