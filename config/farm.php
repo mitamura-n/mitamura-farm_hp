@@ -1,6 +1,8 @@
 <?php
 
 return [
+    // Enabled only in the dedicated verification entry, never through .env.
+    'verification_mode' => false,
     'preview_require_login' => env('PREVIEW_REQUIRE_LOGIN', false),
     'preview_setup_hash' => env('PREVIEW_SETUP_HASH'),
     'preview_setup_expires' => env('PREVIEW_SETUP_EXPIRES', 0),

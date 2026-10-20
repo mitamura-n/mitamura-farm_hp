@@ -19,6 +19,7 @@ class InquiryController extends Controller
         $data = $request->validated();
         abort_unless(hash_equals((string) $request->session()->get('inquiry_token', ''), $data['submission_key']), 419);
         $payload = collect($data)->only(['kind', 'name', 'email', 'items', 'region', 'message'])->all();
+        if (config('farm.verification_mode')) $payload['message']='【本番動作確認・実注文ではありません】'.PHP_EOL.($payload['message'] ?? '');
         $hash = hash_hmac('sha256', json_encode($payload, JSON_UNESCAPED_UNICODE), config('app.key'));
         $existing = Inquiry::where('submission_key', $data['submission_key'])->first();
         if ($existing) return $this->duplicate($existing, $hash);

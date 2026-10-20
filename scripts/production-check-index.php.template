@@ -1,0 +1,32 @@
+<?php
+// PRODUCTION_CHECK_ENTRY: fixed host, private release, and explicit disable switch.
+header('Cache-Control: no-store, private');
+header('X-Robots-Tag: noindex, nofollow, noarchive');
+if (strtolower($_SERVER['HTTP_HOST'] ?? '') !== 'check.mitamurafarm.com') { http_response_code(404); exit; }
+if (!is_file('/home/mitamurafarm/apps/mitamura-production/http-check-enabled')) { http_response_code(503); exit('本番確認用の入口は停止中です。'); }
+if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS']==='off') { http_response_code(403); exit; }
+define('LARAVEL_START', microtime(true));
+$root='__PRODUCTION_RELEASE__';
+require $root.'/vendor/autoload.php';
+$app=require $root.'/bootstrap/app.php';
+$kernel=$app->make(Illuminate\Contracts\Http\Kernel::class);
+$kernel->bootstrap();
+if (!app()->environment('production') || config('database.default')!=='mariadb'
+    || config('database.connections.mariadb.database')!=='mitamurafarm_prod'
+    || config('farm.inquiries_enabled') || config('seo.indexable') || config('mail.default')!=='log') {
+    http_response_code(503); exit('本番確認の安全設定を確認できませんでした。');
+}
+// Request-local overrides only. Never write these to .env or config cache.
+config([
+    'app.url'=>'https://check.mitamurafarm.com',
+    'farm.verification_mode'=>true, 'farm.preview_require_login'=>true,
+    'farm.inquiries_enabled'=>true, 'farm.restrict_mail_recipients'=>true,
+    'farm.mail_allowed_recipients'=>['mitamura.farm@gmail.com'],
+    'mail.default'=>'smtp', 'seo.indexable'=>false,
+    'session.cookie'=>'mitamura_production_check_session', 'session.domain'=>null,
+    'session.path'=>'/', 'session.secure'=>true,
+]);
+$request=Illuminate\Http\Request::capture();
+$response=$kernel->handle($request);
+$response->send();
+$kernel->terminate($request,$response);

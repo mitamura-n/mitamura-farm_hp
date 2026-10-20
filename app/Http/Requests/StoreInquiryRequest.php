@@ -33,6 +33,10 @@ class StoreInquiryRequest extends FormRequest
     {
         return [function (Validator $validator) {
             if ($validator->errors()->isNotEmpty()) return;
+            if (config('farm.verification_mode') && strtolower((string)$this->input('email')) !== 'mitamura.farm@gmail.com') {
+                $validator->errors()->add('email','本番動作確認では、返信先を農園Gmailにしてください。');
+                return;
+            }
             $items = $this->input('items', []);
             if (in_array($this->input('kind'), ['購入希望・お見積もり', '注文の相談'], true)) {
                 if (count($items) === 0) $validator->errors()->add('items', 'ご希望の商品と数量を入力してください。');
