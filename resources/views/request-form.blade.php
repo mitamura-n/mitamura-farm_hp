@@ -13,7 +13,7 @@
  <p class="form-hint">送信時点では注文は確定せず、お支払いも発生しません。在庫を確認し、商品代金・精米料・送料などを含むお見積もりをメールでご案内します。内容にご了承いただいてから、注文確定となります。</p>
  <p id="selection-status" class="selection-status" role="status" aria-live="polite">商品ごとに数量を入力できます。複数の商品もまとめてお知らせください。</p>
  <div id="request-items"></div>
- <p class="form-hint">お米は10kg単位でお選びいただけます。60kgを超える数量や袋分けのご希望は、ご相談内容にお書きください。送料・袋代などは、内容を確認してお見積もりでご案内します。</p>
+ <div class="quantity-guidance"><p>お米は10kg単位で選べます。</p><p>60kgを超える数量・袋分けのご希望は、下の「ご相談内容」へ。</p></div>
  <button type="button" id="add-item" class="add-item">＋ 商品を追加する</button>
  <div id="price-estimate" class="price-summary" role="status" aria-live="polite" aria-atomic="true"></div>
  <label for="region">お届け先の都道府県（購入希望・お見積もりでは必須）<select id="region"><option value="">選択してください</option>@foreach(config('farm.prefectures') as $prefecture)<option>{{ $prefecture }}</option>@endforeach</select></label>

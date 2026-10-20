@@ -31,14 +31,14 @@ function renderPrice(target) {
  }
  paragraph('金額の目安（税込・送料別）');
  for (const line of estimate.lines) paragraph(line.name + ' ' + farmQuantityLabel(catalog.find(p => p.name === line.name), line.units) + '：' + (line.amount === null ? '価格は個別にご案内' : yen(line.amount)));
- paragraph('精米料' + (estimate.millingUnknown ? '（計算できる分）' : '') + '：' + yen(estimate.milling));
- if (estimate.millingUnknown) paragraph('規定表にない重量の精米料は、受付後に個別にご案内します。');
- if (estimate.incomplete) paragraph('価格未設定または数量未入力の商品があるため、小計はまだ確定できません。');
+ if (estimate.millingUnknown) {
+  paragraph('精米料：お見積もりでご案内' + (estimate.milling > 0 ? '（一部の目安：' + yen(estimate.milling) + '）' : ''));
+ } else paragraph('精米料：' + yen(estimate.milling));
+ if (estimate.incomplete) paragraph('未選択の商品・数量や、個別見積もりの商品があります。');
  paragraph(estimate.subtotal === null
-  ? '計算できる分：' + yen(estimate.products + estimate.milling) + '（未確定の商品代金・精米料は含みません）'
-  : '商品代金＋精米料の小計：' + yen(estimate.subtotal));
- paragraph('送料・袋代などの未確定費用は、この小計に含みません。袋分け・梱包方法を確認し、お見積もりでご案内します。');
- paragraph('精米料は同じ商品・精米度合いごとの重量で試算しています。袋分け・代引き等の条件も確認し、最終金額をご案内してから注文を確定します。');
+  ? '商品代金の目安：' + yen(estimate.products) + '（価格をご案内できる商品のみ）'
+  : '小計（目安）：' + yen(estimate.subtotal));
+ paragraph('送料・袋代・代引き手数料などは含みません。受付後、合計金額をメールでご案内し、ご了承後に注文を確定します。');
 }
 let confirmedPayload = null;
 let sent = false;
