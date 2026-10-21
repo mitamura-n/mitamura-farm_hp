@@ -195,6 +195,9 @@ document.querySelector('#send-inquiry').addEventListener('click', async () => {
     ? '内容は保存済みですが、通知処理は未完了です。内容の訂正・追加は、受付番号を添えて農園へメールでお知らせください。'
     : '内容の訂正・追加は受付メールへ返信してください。別件は下のボタンから入力できます。';
   showReceipt(data.receipt, notice);
+  if (response.status === 201 && !data.duplicate && !data.development) {
+   try { window.farmAnalytics?.inquiryAccepted(); } catch { /* Analytics must never affect inquiry acceptance. */ }
+  }
   document.querySelector('#confirmation-details').hidden = true;
   document.querySelector('#confirmation-title').textContent = 'お問い合わせを受け付けました';
   output.textContent = '受付番号：' + data.receipt + '\n注文はまだ確定していません。' + (data.development ? '\n開発環境のため、メールは外部送信されていません。' : data.notification_pending ? '\n内容は保存済みですが、通知処理は未完了です。受付番号をお控えください。' : '\n返信先メールアドレスへの受付メールもご確認ください。');
