@@ -58,3 +58,8 @@ Search Console管理URL：https://search.google.com/u/1/search-console/sitemaps?
 ## 案内ページの独立（2026-10-20）
 
 公開トップに加えて /tokushoho、/privacy、/shipping を公開し、各ページ固有のtitle・description・canonical・OG URLを出力。サイトマップは計4URL。旧アンカーはトップに要約と新ページへのリンクを残す。独立ページ化自体を販売者情報の法的不足解消とは扱わない。Search Consoleの再クロール・インデックス登録は未確認。
+
+
+## GA4導入（2026-10-22）
+
+農園GmailでGA4を設定し、公開4ページの許可後計測を開始。閲覧・流入元・受付完了を確認する。プライバシーポリシー同時更新、管理画面/プレビューは除外。Googleリアルタイムでテスト閲覧と受付完了1件を確認。広告連携なし、個人情報やURL検索文字列/フラグメントは送らない設定。GA4標準の初回訪問/セッション等も発生する。[運用・検証・停止手順](analytics.md)。
