@@ -15,8 +15,9 @@
  <div id="request-items"></div>
  <div class="quantity-guidance"><p>お米は10kg単位で選べます。</p><p>60kgを超える数量・袋分けのご希望は、下の「ご相談内容」へ。</p></div>
  <button type="button" id="add-item" class="add-item">＋ 商品を追加する</button>
- <div id="price-estimate" class="price-summary" role="status" aria-live="polite" aria-atomic="true"></div>
  <label for="region">お届け先の都道府県（購入希望・お見積もりでは必須）<select id="region"><option value="">選択してください</option>@foreach(config('farm.prefectures') as $prefecture)<option>{{ $prefecture }}</option>@endforeach</select></label>
+ <label class="privacy-check shipping-individual"><input type="checkbox" id="individual-shipping">離島へのお届け・袋分けなどの個別対応を希望する</label>
+ <div id="price-estimate" class="price-summary" role="status" aria-live="polite" aria-atomic="true"></div>
  <label for="message">ご相談内容<textarea id="message" rows="4" maxlength="2000" placeholder="袋分けのご希望・商品についてのご質問など"></textarea></label>
  <details class="privacy-notice"><summary>入力情報の取り扱いについて</summary><p>お名前・メールアドレス・ご希望の商品・配送地域・相談内容は、お問い合わせへの回答と注文手続きのために使用します。配送先の詳細はこの段階では不要です。<a href="/privacy">保存期間・個人情報の取り扱いの詳細</a>もご確認ください。@unless($publicCopy ?? false)開発中はテスト用の情報だけをご入力ください。@endunless</p></details>
  <label class="privacy-check"><input id="privacy" type="checkbox" required>入力情報の取り扱いを確認しました（必須）</label>
@@ -37,3 +38,11 @@
 
 <script id="product-master" type="application/json">{!! json_encode($products->values()->map->only(['name','unit_kg','unit_label','max_units','active','milling','price_yen']), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
 <script id="milling-fees" type="application/json">{!! json_encode(config('farm.milling_fees_yen'), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>
+
+@php
+$shippingRates = [];
+foreach (config('shipping.regions') as $shippingRegion) {
+    foreach ($shippingRegion['prefectures'] as $prefecture) $shippingRates[$prefecture] = $shippingRegion['standard'][100];
+}
+@endphp
+<script id="shipping-rates" type="application/json">{!! json_encode($shippingRates, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) !!}</script>

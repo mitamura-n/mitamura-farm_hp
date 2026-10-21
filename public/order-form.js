@@ -15,21 +15,25 @@ const status = document.querySelector('#selection-status');
 const errors = document.querySelector('#form-errors');
 const catalog = JSON.parse(document.querySelector('#product-master').textContent);
 const millingFees = JSON.parse(document.querySelector('#milling-fees').textContent);
+const shippingRates = JSON.parse(document.querySelector('#shipping-rates').textContent);
+const destination = document.querySelector('#region');
+const individualShipping = document.querySelector('#individual-shipping');
+const individualShippingNote = '離島へのお届け・袋分けなどの個別対応を希望します。';
 function renderPrice(target) {
  const rows = [...items.children].map(row => ({
   product: row.querySelector('.item-product').value,
   units: row.querySelector('.item-quantity').value,
   milling: row.querySelector('.item-milling').value,
  }));
- const estimate = estimateFarmPrice(rows, catalog, millingFees);
+ const estimate = estimateFarmPrice(rows, catalog, millingFees, {destination:destination.value, rates:shippingRates, individual:individualShipping.checked});
  target.replaceChildren();
- const paragraph = text => { const p = document.createElement('p'); p.textContent = text; target.append(p); };
+ const paragraph = (text, className = '') => { const p = document.createElement('p'); p.textContent = text; p.className = className; target.append(p); };
  const yen = amount => amount.toLocaleString('ja-JP') + '円';
  if (!estimate.lines.length) {
-  paragraph('商品と数量を選ぶと、金額の目安を表示します。送料は別途ご案内します。');
+  paragraph('商品・数量・お届け先を選ぶと、金額の目安を表示します。');
   return;
  }
- paragraph('金額の目安（税込・送料別）');
+ paragraph('金額の目安（税込）');
  for (const line of estimate.lines) paragraph(line.name + ' ' + farmQuantityLabel(catalog.find(p => p.name === line.name), line.units) + '：' + (line.amount === null ? '価格は個別にご案内' : yen(line.amount)));
  if (estimate.millingUnknown) {
   paragraph('精米料：お見積もりでご案内' + (estimate.milling > 0 ? '（一部の目安：' + yen(estimate.milling) + '）' : ''));
@@ -38,8 +42,14 @@ function renderPrice(target) {
  paragraph(estimate.subtotal === null
   ? '商品代金の目安：' + yen(estimate.products) + '（価格をご案内できる商品のみ）'
   : '小計（目安）：' + yen(estimate.subtotal));
- paragraph('送料・代引き手数料は含みません。通常のご注文では袋代はかかりません。受付後、合計金額をメールでご案内し、ご了承後に注文を確定します。');
+ if (estimate.shipping.amount !== null) paragraph('送料（目安）：' + yen(estimate.shipping.amount));
+ else paragraph(estimate.shipping.reason === 'destination' ? '送料：お届け先を選んでください' : '送料：個別にお見積もりします');
+ if (estimate.total !== null) paragraph('送料込みの目安：' + yen(estimate.total), 'price-total');
+ paragraph('送料の自動表示は、お米1種類・10kgまたは20kgの通常配送が対象です。離島・袋分けなどは個別にご案内します。');
+ paragraph('振込・払込手数料、代引き手数料は別途必要です。最終金額はメールでご案内し、ご了承後に注文を確定します。');
 }
+destination.addEventListener('change', () => renderPrice(document.querySelector('#price-estimate')));
+individualShipping.addEventListener('change', () => renderPrice(document.querySelector('#price-estimate')));
 let confirmedPayload = null;
 let sent = false;
 const receiptPanel = document.createElement('div');
@@ -139,14 +149,17 @@ form.addEventListener('submit', event => {
  if (!chosen.length && (kind.value === '購入希望・お見積もり' || !document.querySelector('#message').value.trim())) {
   errors.textContent = '商品と数量、またはご相談内容を入力してください。'; errors.hidden = false; errors.focus(); return;
  }
+ const message = [individualShipping.checked ? individualShippingNote : '', document.querySelector('#message').value.trim()].filter(Boolean).join('\n');
+ if (message.length > 2000) { errors.textContent = '個別対応のご希望を含め、ご相談内容は2,000文字以内で入力してください。'; errors.hidden = false; errors.focus(); return; }
  confirmedPayload = {
   submission_key: document.querySelector('#submission-key').value,
   kind: kind.value, name: document.querySelector('#name').value.trim(), email: document.querySelector('#email').value.trim(),
-  region: document.querySelector('#region').value || null, message: document.querySelector('#message').value.trim() || null,
+  region: document.querySelector('#region').value || null, message: message || null,
   privacy: document.querySelector('#privacy').checked, website: document.querySelector('#website').value,
   items: chosen.map(row => ({product:row.querySelector('.item-product').value,quantity:String(Number(row.querySelector('.item-quantity').value) * catalog.find(p => p.name === row.querySelector('.item-product').value).unit_kg),milling:row.querySelector('.item-product').value === '分づき米' ? row.querySelector('.item-milling').value : null})),
  };
- for (const key of ['name','email','kind','region','message']) document.querySelector('#out-'+key).textContent = document.querySelector('#'+key).value || '未入力';
+ for (const key of ['name','email','kind','region']) document.querySelector('#out-'+key).textContent = document.querySelector('#'+key).value || '未入力';
+ document.querySelector('#out-message').textContent = confirmedPayload.message || '未入力';
  const output = document.querySelector('#out-items'); output.replaceChildren();
  for (const row of items.children) {
   const product = row.querySelector('.item-product').value;

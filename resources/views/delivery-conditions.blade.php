@@ -1,10 +1,10 @@
 <section id="delivery" class="section">
  <p class="eyebrow">DELIVERY & RETURNS</p>@unless($standalone ?? false)<h2>送料・発送・返品について</h2>@endunless
  <p>送料は税込・1個口の目安です。梱包後の重量・箱サイズ・組み合わせを確認し、注文確定前に合計金額をご案内します。</p>
- <details><summary>地域別の送料表を見る（税込）</summary>
+ <details @if($standalone ?? false) open @endif><summary>地域別の送料表を見る（税込）</summary>
  <div style="overflow-x:auto" tabindex="0" role="region" aria-label="通常便の送料表（横にスクロールできます）"><table style="min-width:580px;width:100%"><caption>通常便の送料（円）</caption><thead><tr><th scope="col">地域</th>@foreach([60,80,100,120] as $size)<th scope="col">{{ $size }}サイズ</th>@endforeach</tr></thead><tbody>
- @foreach(['関東・信越・北陸・東海・近畿'=>[800,1100,1300,1600],'東北・中国・四国'=>[900,1200,1400,1600],'九州'=>[1000,1300,1500,1700],'北海道'=>[1300,1600,1800,2200],'沖縄'=>[1400,1800,2000,2200]] as $region=>$fees)
- <tr><th scope="row">{{ $region }}</th>@foreach($fees as $fee)<td>{{ number_format($fee) }}</td>@endforeach</tr>@endforeach
+ @foreach(config('shipping.regions') as $region=>$rates)
+ <tr><th scope="row">{{ $region }}</th>@foreach($rates['standard'] as $fee)<td>{{ number_format($fee) }}</td>@endforeach</tr>@endforeach
  <tr><th scope="row">その他離島</th><td colspan="4">個別にご案内</td></tr></tbody></table></div>
  <p>お米は10kg単位でお選びいただけます。10kg・20kgは100サイズが目安です。重量の判定には箱・梱包材を含みます。米粉・米ぬかや複数商品の組み合わせは、個別に送料をご案内します。</p>
  <table style="width:100%"><caption>梱包後25kg超〜30kg：重量ゆうパック・120サイズ（税込）</caption><thead><tr><th scope="col">地域</th><th scope="col">送料</th></tr></thead><tbody>
