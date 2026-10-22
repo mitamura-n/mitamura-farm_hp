@@ -56,3 +56,4 @@ auth.json
 /.tools/
 /storage/logs/*
 !/storage/logs/.gitignore
+__pycache__/
