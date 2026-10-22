@@ -82,6 +82,8 @@
 
 ## 詳細資料
 
+- [Cursor向け引き継ぎ：農園の方針・現在地・今後の作業](cursor-handoff.md)
+
 - [行った作業・確認結果・残作業](work-log.md)
 - [復号用秘密鍵の別保管手順](backup-recovery-key.md)
 - [農園関係の認証情報・保管状況](credential-inventory.md)
