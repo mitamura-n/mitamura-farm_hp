@@ -2,9 +2,13 @@
 
 Laravel 13 / PHP 8.4。農園・商品の紹介と、フォームでの注文相談受付を行うサイトです。フォーム送信時点では注文は確定しません。
 
+## 起動・本番更新コマンド（保存版）
+
+**[PowerShellのコマンドと操作説明はこちら](docs/commands.md)**。ローカル起動、実行ポリシーエラー時の代替、本番の確認・反映、publish入力、成功・エラーの見方をまとめています。
+
 ## 開発の現在地
 
-完成状況と優先順位は [docs/roadmap.md](docs/roadmap.md)、実装状況は [docs/status.md](docs/status.md) を確認してください。旧HPは継続公開中で、新HPは認証付きプレビューです。
+新HPは本番公開済みで、旧HPは管理者限定の保存版です。2026-10-26の読み取り確認では本番公開版は79a4e28。現在の公開・設定と実施履歴は [docs/important-settings.md](docs/important-settings.md) と [docs/work-log.md](docs/work-log.md) を確認してください。[docs/roadmap.md](docs/roadmap.md) と [docs/status.md](docs/status.md) は作成時点の記録も含みます。
 
 ## プレビュー
 
