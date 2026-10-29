@@ -59,6 +59,7 @@ fi
 test ! -e "$release"
 test ! -e "$ops"
 test -f "$base/source-$revision.tar.gz"
+test ! -L "$base/source-$revision.tar.gz"
 # Backup success must be from this invocation, not a stale previous success.
 before=$(stat -c '%y' "$base/backups/daily-status.json")
 bash "$base/backup-production-daily.sh"
@@ -67,6 +68,8 @@ bash "$base/backup-production-daily.sh"
 mkdir -p "$release" "$ops/assets"
 tar -xzf "$base/source-$revision.tar.gz" -C "$release"
 cmp "$release/composer.lock" "$previous/composer.lock"
+# Transport archive only: source history lives in GitHub. Keep releases and DB backups.
+rm -- "$base/source-$revision.tar.gz"
 ln -s "$base/shared/.env" "$release/.env"
 mv "$release/storage" "$release/storage-skeleton"
 ln -s "$base/shared/storage" "$release/storage"
