@@ -45,6 +45,11 @@ nav a:hover, footer a:not(.brand):hover { color: var(--gold-dark); }
 .rice-product-figure { position: relative; margin: 0; }
 .rice-product-photo { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center bottom; }
 .rice-product-figure figcaption { position: absolute; right: 8px; bottom: 8px; padding: 3px 9px; background: #fffdf5; color: #28372d; font-size: 12px; }
+.card-payment-guide { margin-top: 32px; padding: clamp(16px, 4vw, 28px); background: #faf9f3; border: 1px solid #d6ccb5; }
+.card-payment-guide h2 { font-size: clamp(20px, 3.5vw, 26px); margin: 0 0 16px; }
+.card-payment-guide ol { margin: 0; padding-inline-start: 1.5em; }
+.card-payment-guide li + li { margin-top: 12px; }
+.card-payment-guide li p { margin: 4px 0 0; }
 .product-body small { color: var(--gold-dark); }
 .product button { color: var(--green); border-color: #a9ba86; }
 .product button:hover { border-color: var(--gold); }

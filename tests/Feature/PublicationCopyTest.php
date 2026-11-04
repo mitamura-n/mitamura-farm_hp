@@ -20,7 +20,7 @@ class PublicationCopyTest extends TestCase
         config(['farm.preview_require_login'=>false,'farm.inquiries_enabled'=>false]);
         $this->get('/')->assertOk()->assertDontSee('制作プレビュー')->assertDontSee('公開前に最終確認')
             ->assertSee('現在フォーム受付を停止しています')->assertSee('<fieldset disabled',false)
-            ->assertSee('プライバシーポリシー')->assertSee('クレジットカード決済は準備中');
+            ->assertSee('プライバシーポリシー')->assertSee('href="/tokushoho#card-payment"', false);
     }
 
     public function test_public_form_uses_customer_copy_without_development_notices(): void

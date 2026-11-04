@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="any" href="/images/brand/favicon-transparent.png?v=3">
     <link rel="apple-touch-icon" href="/images/brand/favicon-transparent.png?v=3">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/brand-theme.css?v=19">
+    <link rel="stylesheet" href="/brand-theme.css?v=20">
 </head>
 
 <body>
