@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="any" href="/images/brand/favicon-transparent.png?v=3">
     <link rel="apple-touch-icon" href="/images/brand/favicon-transparent.png?v=3">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/brand-theme.css?v=18">
+    <link rel="stylesheet" href="/brand-theme.css?v=19">
 </head>
 
 <body>
@@ -77,7 +77,8 @@
                 <p>同じコシヒカリを、お好みの精米で。<br>米粉・米ぬかもご案内します。</p>
             </div>@include('purchase-help')<div class="product-grid">
                 <article class="product">
-                    <div class="product-art brown"><span class="rice-bowl">◡</span><span>GENMAI</span></div>
+                    <img class="rice-product-photo" src="/images/products/brown-rice.jpg" width="1122" height="1402"
+                        loading="lazy" decoding="async" alt="田んぼを背景に、赤い器に盛った三田村農園の玄米">
                     <div class="product-body"><small>お米の風味を楽しむ</small>
                         <h3>玄米</h3>
                         <p>ぬか層を残したお米。炊き方や浸水時間は、ご使用の炊飯器に合わせて調整してください。</p>
@@ -88,7 +89,8 @@
                     </div>
                 </article>
                 <article class="product">
-                    <div class="product-art white"><span class="rice-bowl">◡</span><span>HAKUMAI</span></div>
+                    <img class="rice-product-photo" src="/images/products/white-rice.jpg" width="1122" height="1402"
+                        loading="lazy" decoding="async" alt="田んぼを背景に、赤い器に盛った三田村農園の白米">
                     <div class="product-body"><small>いつものごはんに</small>
                         <h3>白米</h3>
                         <p>毎日のごはんに。ご注文後に精米してお届けします。ぬか層を取り除いた白米で、いつもの食卓に取り入れやすい選択です。</p>
@@ -99,7 +101,11 @@
                     </div>
                 </article>
                 <article class="product">
-                    <div class="product-art half"><span class="rice-bowl">◡</span><span>BUTSUKIMAI</span></div>
+                    <figure class="rice-product-figure">
+                        <img class="rice-product-photo" src="/images/products/partially-milled-5bu.jpg" width="1122" height="1402"
+                            loading="lazy" decoding="async" alt="田んぼを背景に、赤い器に盛った三田村農園の5分づき米">
+                        <figcaption>写真は5分づき</figcaption>
+                    </figure>
                     <div class="product-body"><small>玄米と白米のあいだ</small>
                         <h3>分づき米</h3>
                         <p>玄米と白米のあいだで、好みに合わせたい方へ。ぬか層を一部残して精米します。ご希望の度合いをフォームへご入力ください。</p>

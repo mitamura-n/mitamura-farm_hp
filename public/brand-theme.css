@@ -42,6 +42,9 @@ nav a:hover, footer a:not(.brand):hover { color: var(--gold-dark); }
 .product-art.half { background: #dde2d2; }
 .product-art > span:last-child { color: #544122; }
 .rice-bowl { color: #fffdf5; text-shadow: 0 8px 0 var(--leaf); }
+.rice-product-figure { position: relative; margin: 0; }
+.rice-product-photo { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center bottom; }
+.rice-product-figure figcaption { position: absolute; right: 8px; bottom: 8px; padding: 3px 9px; background: #fffdf5; color: #28372d; font-size: 12px; }
 .product-body small { color: var(--gold-dark); }
 .product button { color: var(--green); border-color: #a9ba86; }
 .product button:hover { border-color: var(--gold); }
