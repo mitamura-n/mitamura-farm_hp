@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="any" href="/images/brand/favicon-transparent.png?v=3">
     <link rel="apple-touch-icon" href="/images/brand/favicon-transparent.png?v=3">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/brand-theme.css?v=20">
+    <link rel="stylesheet" href="/brand-theme.css?v=22">
 </head>
 
 <body>
@@ -83,9 +83,9 @@
                         <h3>玄米</h3>
                         <p>ぬか層を残したお米。炊き方や浸水時間は、ご使用の炊飯器に合わせて調整してください。</p>
                         <p class="price">{{ $products['玄米']->unit_label }}
-                            {{ $products['玄米']->price_yen === null ? '価格はお問い合わせ' : number_format($products['玄米']->price_yen) . '円（税込）' }}
-                        </p><small class="fee-note">送料別。合計金額をご案内後に確定します。</small><button data-product="玄米"
-                            @disabled(!$products['玄米']->active)>このお米の希望を入力 ↗</button>
+                            <strong>{{ $products['玄米']->price_yen === null ? '価格はお問い合わせ' : number_format($products['玄米']->price_yen) . '円（税込）' }}</strong>
+                        </p><small class="fee-note">送料別</small><button class="product-choice" type="button" data-product="玄米"
+                            @disabled(!$products['玄米']->active)>玄米を選ぶ</button>
                     </div>
                 </article>
                 <article class="product">
@@ -95,9 +95,9 @@
                         <h3>白米</h3>
                         <p>毎日のごはんに。ご注文後に精米してお届けします。ぬか層を取り除いた白米で、いつもの食卓に取り入れやすい選択です。</p>
                         <p class="price">{{ $products['白米']->unit_label }}
-                            {{ $products['白米']->price_yen === null ? '価格はお問い合わせ' : number_format($products['白米']->price_yen) . '円（税込）' }}
-                            ＋ 精米料</p><small class="fee-note">送料別。合計金額をご案内後に確定します。</small><button data-product="白米"
-                            @disabled(!$products['白米']->active)>このお米の希望を入力 ↗</button>
+                            <strong>{{ $products['白米']->price_yen === null ? '価格はお問い合わせ' : number_format($products['白米']->price_yen) . '円（税込）' }}</strong>
+                        </p><small class="fee-note">精米料・送料別</small><button class="product-choice" type="button" data-product="白米"
+                            @disabled(!$products['白米']->active)>白米を選ぶ</button>
                     </div>
                 </article>
                 <article class="product">
@@ -110,9 +110,9 @@
                         <h3>分づき米</h3>
                         <p>玄米と白米のあいだで、好みに合わせたい方へ。ぬか層を一部残して精米します。ご希望の度合いをフォームへご入力ください。</p>
                         <p class="price">{{ $products['分づき米']->unit_label }}
-                            {{ $products['分づき米']->price_yen === null ? '価格はお問い合わせ' : number_format($products['分づき米']->price_yen) . '円（税込）' }}
-                            ＋ 精米料</p><small class="fee-note">送料別。合計金額をご案内後に確定します。</small><button data-product="分づき米"
-                            @disabled(!$products['分づき米']->active)>このお米の希望を入力 ↗</button>
+                            <strong>{{ $products['分づき米']->price_yen === null ? '価格はお問い合わせ' : number_format($products['分づき米']->price_yen) . '円（税込）' }}</strong>
+                        </p><small class="fee-note">精米料・送料別</small><button class="product-choice" type="button" data-product="分づき米"
+                            @disabled(!$products['分づき米']->active)>分づき米を選ぶ</button>
                     </div>
                 </article>
             </div>
@@ -121,20 +121,24 @@
                         loading="lazy" alt="旧HPに掲載された三田村農園の米粉の袋">
                     <div>
                         <h3>米粉</h3>
-                        <p>農園のコシヒカリを白米に精米し、専門業者で製粉した上新粉。お菓子づくりや料理に。{{ $products['米粉']->unit_label }}
-                            {{ $products['米粉']->price_yen === null ? '価格はお問い合わせ' : number_format($products['米粉']->price_yen) . '円（税込）' }}。
+                        <p>農園のコシヒカリを白米に精米し、専門業者で製粉した上新粉。お菓子づくりや料理に。</p>
+                        <p class="price">{{ $products['米粉']->unit_label }}
+                            <strong>{{ $products['米粉']->price_yen === null ? '価格はお問い合わせ' : number_format($products['米粉']->price_yen) . '円（税込）' }}</strong>
                         </p>
-                    </div><button data-product="米粉" @disabled(!$products['米粉']->active) aria-label="米粉を選ぶ">↗</button>
+                        <small class="fee-note">送料別</small>
+                        <button class="product-choice" type="button" data-product="米粉" @disabled(!$products['米粉']->active)>米粉を選ぶ</button>
+                    </div>
                 </article>
                 <article><span class="sub-symbol">糠</span>
                     <div>
                         <h3>米ぬか</h3>
-                        <p>農園のコシヒカリからとれた米ぬか。{{ $products['米ぬか']->unit_label }}
-                            {{ $products['米ぬか']->price_yen === null ? '価格はお問い合わせ' : number_format($products['米ぬか']->price_yen) . '円（税込）' }}。用途・保存方法は注文相談で確認します。@unless ($products['米ぬか']->active)
-                                現在、受付を停止しています。
-                            @endunless
+                        <p>農園のコシヒカリからとれた米ぬか。用途・保存方法は注文相談で確認します。</p>
+                        <p class="price">{{ $products['米ぬか']->unit_label }}
+                            <strong>{{ $products['米ぬか']->price_yen === null ? '価格はお問い合わせ' : number_format($products['米ぬか']->price_yen) . '円（税込）' }}</strong>
                         </p>
-                    </div><button data-product="米ぬか" @disabled(!$products['米ぬか']->active) aria-label="米ぬかを選ぶ">↗</button>
+                        <small class="fee-note">送料別</small>
+                        <button class="product-choice" type="button" data-product="米ぬか" @disabled(!$products['米ぬか']->active)>{{ $products['米ぬか']->active ? '米ぬかを選ぶ' : '米ぬかは受付停止中' }}</button>
+                    </div>
                 </article>
             </div>@include('sales-conditions')<p class="pending">
                 商品価格・精米料は税込です。お米の重量は玄米基準です。在庫と、送料・精米料などを含む合計は返信でご案内します。玄米粉は現在の案内対象に含めていません。</p>
@@ -158,10 +162,11 @@
                 </article>
                 <article role="listitem"><b>04</b>
                     <h3>お支払い・精米・発送</h3>
-                    <p>銀行振込・郵便振替は入金確認後、代引きは注文確定後、通常2〜3営業日以内に発送します。</p>
+                    <p>銀行振込・郵便振替・カード払いはお支払い確認後、代引きは注文確定後、通常2〜3営業日以内に発送します。</p>
                 </article>
             </div>
-            <p class="order-payment-note">銀行振込・郵便振替は、注文確定のご案内から7日以内にお支払いください。代引きは商品のお受け取り時のお支払いです。営業日は土日・祝日を除きます。</p>
+            <p class="order-payment-note">営業日は土日・祝日を除きます。<br><a href="#payment-methods">お支払い方法・期限・手数料を見る ↑</a></p>
+            <a class="button" href="#contact">お見積もりフォームへ <span>↓</span></a>
             <p class="pending">フォーム送信時点では注文は確定せず、お支払いも発生しません。<a
                     href="#delivery">送料・発送・返品条件</a>をご確認ください。@unless ($publicCopy)
                     開発中はテスト用の情報だけをご入力ください。
