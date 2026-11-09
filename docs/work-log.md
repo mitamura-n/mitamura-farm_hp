@@ -427,3 +427,9 @@ Squareは10月30日の本人報告で審査承認済み。11月4日は公式手�
 ### 2026-11-09：送料・低温保管の旧URL転送（ECH-43）
 
 本番 .htaccess に /news/news_20230407.htm → /shipping、/diary/hokan.htm → /#story の301を追加。GET/HEADの旧クエリを破棄。適用前の設定は公開領域外の offsite/ops-stage/legacy-redirects-20261109-verified/before.htaccess に保存した。ローカルApache 72ケース、本番の転送16ケースと既存動作9ケースを確認。旧「米ぬかの食べ方」は404を維持し、関連ページ公開時に再判断する。
+
+### 2026-11-09：農園の物語・Instagram・米粉の使い方を公開
+
+本人の公開指示を受け、本番版 7dd24a156ee54bcfbee728b568e4fe2c2fa2723d を公開（前版 441c408）。祖父の2003年の稲刈り写真、フッターとスマホメニューのInstagramリンク、米粉の使い方 /rice-flour を追加。農園とお客様の料理写真3点を掲載し、ナンの写真を共有用画像に指定。米粉ページをサイトマップへ追加した。既存のGA4計測範囲は維持している。
+
+初回の /komeko は既存ディレクトリと衝突して403になったため旧版へ復帰し、/rice-flour へ変更して再公開した。自動テストと公開前バックアップ・Drive照合を経て、本番ページ、画像、共有画像メタ情報、サイトマップを確認。公開確認後、旧 /komeko/komeko.htm を /rice-flour への直接301に変更し、HTTP/HTTPS・www有無・GET/HEADの8ケースと既存10ケースを確認した。適用前の転送設定は非公開 ops-stage/komeko-redirect-7dd24a156ee5/before.htaccess に保全。旧米ぬかの対象外URLは従来の動作を維持。
