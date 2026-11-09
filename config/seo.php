@@ -4,7 +4,7 @@ return [
     // Publication must be explicitly enabled after the launch review.
     'indexable' => env('SEO_INDEXABLE', false) && env('APP_ENV') === 'production' && !env('PREVIEW_REQUIRE_LOGIN', false),
     'pages' => [
-        'komeko' => [
+        'rice-flour' => [
             'title' => '米粉の使い方｜ホットケーキ・ブラウニー・ナン',
             'description' => '三田村農園のコシヒカリから作る米粉（上新粉）。農園とお客様が作ったホットケーキ・ブラウニー・ナンを写真で紹介します。',
             'view' => 'rice-flour-guide',

@@ -26,7 +26,7 @@ class SeoTest extends TestCase
         $this->assertSame('https://mitamurafarm.com/',(string)$xml->url->loc);
         $this->assertCount(5,$xml->url);
         $locations = array_map(fn($node)=>(string)$node->loc, iterator_to_array($xml->url, false));
-        foreach (['tokushoho','privacy','shipping','komeko'] as $path) $this->assertContains('https://mitamurafarm.com/'.$path, $locations);
+        foreach (['tokushoho','privacy','shipping','rice-flour'] as $path) $this->assertContains('https://mitamurafarm.com/'.$path, $locations);
         $response->assertDontSee('/admin')->assertDontSee('preview.mitamurafarm.com');
     }
 }

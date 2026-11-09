@@ -129,7 +129,7 @@
                         </p>
                         <small class="fee-note">送料別</small>
                         <button class="product-choice" type="button" data-product="米粉" @disabled(!$products['米粉']->active)>米粉を選ぶ</button>
-                        <a class="information-link rice-flour-link" href="/komeko">米粉の使い方を見る →</a>
+                        <a class="information-link rice-flour-link" href="/rice-flour">米粉の使い方を見る →</a>
                     </div>
                 </article>
                 <article><span class="sub-symbol">糠</span>
