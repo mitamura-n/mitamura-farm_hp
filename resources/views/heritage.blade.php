@@ -6,6 +6,10 @@
   <div class="heritage-body">
     <p class="body-lead">この土地に重ねてきた、<br class="mobile-break">幾世代もの営み。<br>その続きを、私の手で。</p>
     <p>越前・日野山の麓にある、三田村農園の田んぼ。何世代も前から先祖が守り、耕してきた土地です。祖父、父へとつながれたこの田んぼを、いま、私が受け継いでいます。</p>
+    <figure class="heritage-photo">
+      <img src="/images/legacy/harvest-2003.jpg" alt="田んぼでコンバインを操作し、稲を刈る祖父" width="500" height="375" loading="lazy" decoding="async">
+      <figcaption>祖父の稲刈り。2003年9月、三田村農園の田んぼで。</figcaption>
+    </figure>
     <p>山を望み、川の水とともに稲を育てる。代々つながれてきた田んぼから、毎日の食卓へお米をお届けします。</p>
   </div>
 </section>

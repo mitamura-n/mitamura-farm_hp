@@ -4,6 +4,13 @@ return [
     // Publication must be explicitly enabled after the launch review.
     'indexable' => env('SEO_INDEXABLE', false) && env('APP_ENV') === 'production' && !env('PREVIEW_REQUIRE_LOGIN', false),
     'pages' => [
+        'komeko' => [
+            'title' => '米粉の使い方｜ホットケーキ・ブラウニー・ナン',
+            'description' => '三田村農園のコシヒカリから作る米粉（上新粉）。農園とお客様が作ったホットケーキ・ブラウニー・ナンを写真で紹介します。',
+            'view' => 'rice-flour-guide',
+            'share_image' => 'images/legacy/rice-flour-naan.jpg',
+            'share_image_alt' => '三田村農園の米粉で作ったナン',
+        ],
         'tokushoho' => ['title'=>'特定商取引法に基づく表記','description'=>'三田村農園の販売者情報、お支払い方法・手数料、発送、返品・キャンセルに関するご案内です。','view'=>'sales-info'],
         'privacy' => ['title'=>'プライバシーポリシー','description'=>'三田村農園のお問い合わせ・注文に伴う個人情報の取得目的、管理、保存期間、お問い合わせ窓口をご案内します。','view'=>'privacy-policy'],
         'shipping' => ['title'=>'送料・発送・返品について','description'=>'三田村農園の地域別送料、発送の目安、ご注文の変更・キャンセル、返品・交換についてご案内します。','view'=>'delivery-conditions'],

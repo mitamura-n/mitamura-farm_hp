@@ -8,9 +8,12 @@
 <meta property="og:title" content="{{ $pageTitle ?? config('seo.title') }}">
 <meta property="og:description" content="{{ $pageDescription ?? config('seo.description') }}">
 <meta property="og:url" content="{{ config('seo.indexable') ? ($pageUrl ?? config('seo.url')) : url()->current() }}">
-<meta property="og:image" content="{{ config('seo.indexable') ? config('seo.url') : rtrim(config('app.url'), '/').'/' }}images/brand/mitamura-main.png">
-<meta property="og:image:alt" content="三田村農園のロゴ">
-<meta name="twitter:card" content="summary">
+@php
+    $shareImage = $page['share_image'] ?? 'images/brand/mitamura-main.png';
+@endphp
+<meta property="og:image" content="{{ rtrim(config('seo.indexable') ? config('seo.url') : config('app.url'), '/').'/'.$shareImage }}">
+<meta property="og:image:alt" content="{{ $page['share_image_alt'] ?? '三田村農園のロゴ' }}">
+<meta name="twitter:card" content="{{ isset($page['share_image']) ? 'summary_large_image' : 'summary' }}">
 
 @if(config('seo.indexable'))
 @if(config('seo.site_verification'))<meta name="google-site-verification" content="{{ config('seo.site_verification') }}">@endif

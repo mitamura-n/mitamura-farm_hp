@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="any" href="/images/brand/favicon-transparent.png?v=3">
     <link rel="apple-touch-icon" href="/images/brand/favicon-transparent.png?v=3">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/brand-theme.css?v=22">
+    <link rel="stylesheet" href="/brand-theme.css?v=25">
 </head>
 
 <body>
@@ -22,7 +22,9 @@
                 src="/images/brand/mitamura-main-transparent.png?v=1" alt="三田村農園 MITAMURA FARM" width="1462"
                 height="1076"></a><button class="menu" aria-expanded="false" aria-controls="navigation">メニュー</button>
         <nav id="navigation"><a href="#heritage">農園の物語</a><a href="#story">育て方</a><a href="#products">お米と商品</a><a
-                href="#guide">ご注文の流れ</a><a class="nav-cta" href="#products">商品・価格を見る ↗</a></nav>
+                href="#guide">ご注文の流れ</a><a class="nav-cta" href="#products">商品・価格を見る ↗</a>
+            @include('instagram-link', ['mobileMenu' => true])
+        </nav>
     </header>
     <main>
         <section class="hero">
@@ -117,7 +119,7 @@
                 </article>
             </div>
             <div class="subproducts">
-                <article><img class="flour-photo" src="/images/legacy/komeko_komeko_2.jpg" width="76" height="100"
+                <article id="rice-flour-product"><img class="flour-photo" src="/images/legacy/komeko_komeko_2.jpg" width="76" height="100"
                         loading="lazy" alt="旧HPに掲載された三田村農園の米粉の袋">
                     <div>
                         <h3>米粉</h3>
@@ -127,6 +129,7 @@
                         </p>
                         <small class="fee-note">送料別</small>
                         <button class="product-choice" type="button" data-product="米粉" @disabled(!$products['米粉']->active)>米粉を選ぶ</button>
+                        <a class="information-link rice-flour-link" href="/komeko">米粉の使い方を見る →</a>
                     </div>
                 </article>
                 <article><span class="sub-symbol">糠</span>
@@ -230,7 +233,11 @@
 <footer><a class="brand brand-image footer-brand" href="#" aria-label="三田村農園 ホーム"><img
             src="/images/brand/mitamura-main-transparent.png?v=1" alt="三田村農園 MITAMURA FARM" width="1462"
             height="1076" loading="lazy"></a>
-    <p>自然と育てる。毎日の食卓へ。</p><a href="#contact">お問い合わせ</a>
+    <p>自然と育てる。毎日の食卓へ。</p>
+    <nav class="information-footer" aria-label="農園へのリンク">
+        <a href="#contact">お問い合わせ</a>
+        @include('instagram-link')
+    </nav>
     @unless ($publicCopy)
         <p class="legal">公開前の確認事項：事業者情報・特定商取引法に基づく表記・プライバシーポリシー・商品表示</p>
     @endunless
