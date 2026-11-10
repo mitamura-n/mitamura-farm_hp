@@ -325,3 +325,9 @@ footer .instagram-link:focus-visible { outline: 2px solid #a04778; outline-offse
     #navigation .instagram-link-icon { width: 30px; height: 30px; flex-basis: 30px; }
     #navigation .instagram-link-icon svg { width: 20px; height: 20px; }
 }
+
+.subproducts .flour-photo, .subproducts .bran-photo { width: clamp(96px, 13vw, 150px); }
+.subproducts .flour-photo, .subproducts .bran-photo img { height: auto; object-fit: contain; }
+.subproducts .bran-photo { flex: none; margin: 0; }
+.subproducts .bran-photo img { display: block; width: 100%; }
+.subproducts .bran-photo figcaption { margin-top: 6px; font-size: .8125rem; text-align: center; }

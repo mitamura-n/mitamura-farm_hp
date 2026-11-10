@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="any" href="/images/brand/favicon-transparent.png?v=3">
     <link rel="apple-touch-icon" href="/images/brand/favicon-transparent.png?v=3">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="/brand-theme.css?v=25">
+    <link rel="stylesheet" href="/brand-theme.css?v=27">
 </head>
 
 <body>
@@ -119,8 +119,8 @@
                 </article>
             </div>
             <div class="subproducts">
-                <article id="rice-flour-product"><img class="flour-photo" src="/images/legacy/komeko_komeko_2.jpg" width="76" height="100"
-                        loading="lazy" alt="旧HPに掲載された三田村農園の米粉の袋">
+                <article id="rice-flour-product"><img class="flour-photo" src="/images/products/rice-flour-1kg.jpg" width="1122" height="1402"
+                        loading="lazy" decoding="async" alt="田んぼを背景に撮影した三田村農園の米粉1kg入りの袋">
                     <div>
                         <h3>米粉</h3>
                         <p>農園のコシヒカリを白米に精米し、専門業者で製粉した上新粉。お菓子づくりや料理に。</p>
@@ -132,7 +132,12 @@
                         <a class="information-link rice-flour-link" href="/rice-flour">米粉の使い方を見る →</a>
                     </div>
                 </article>
-                <article><span class="sub-symbol">糠</span>
+                <article id="rice-bran-product">
+                    <figure class="bran-photo">
+                        <img src="/images/products/rice-bran-sample.jpg" width="1122" height="1402" loading="lazy"
+                            decoding="async" alt="田んぼを背景に撮影した三田村農園の米ぬかの袋">
+                        <figcaption>撮影用は2kg</figcaption>
+                    </figure>
                     <div>
                         <h3>米ぬか</h3>
                         <p>農園のコシヒカリからとれた米ぬか。用途・保存方法は注文相談で確認します。</p>
